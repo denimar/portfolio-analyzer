@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:  
+    - uses: actions/checkout@v4
+      
+    - name: Build the project      
+      shell: bash
+      run: |
+        yarn install
+        yarn build
+
+    - name: Copy the Node Modules folder
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        port: ${{ secrets.PORT }}
+        key: ${{ secrets.KEY }}
+        source: "node_modules"
+        target: "~/modules/tradeninja"
+
+    - name: Copy files to Server
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        port: ${{ secrets.PORT }}
+        key: ${{ secrets.KEY }}
+        source: "build"
+        target: "~/modules/tradeninja"
+        strip_components: 1
