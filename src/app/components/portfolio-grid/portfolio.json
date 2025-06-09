@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "category": "US Stocks",
+    "allocation": 30,
+    "amount": 38400,
+    "suggestedAssets": "VTI,VOO,SCHB,ITOT,SPLG,IVV,SPTM,SPY,VOO,SWPPX,FZROX,VTHR",
+    "notes": "Core market exposure"
+  },
+  {
+    "id": 2,
+    "category": "Tech & Thematic",
+    "allocation": 10,
+    "amount": 12800,
+    "suggestedAssets": "QQQ,ARKK,VGT,XLK,FTEC,IYW,XLC,ARKW,SKYY,SOXX,ROBO,HACK,BOTZ,META",
+    "notes": "Growth-focused assets"
+  },
+  {
+    "id": 3,
+    "category": "International ETFs",
+    "allocation": 10,
+    "amount": 12800,
+    "suggestedAssets": "VEA,VXUS,VWO,IXUS,SCHF,SPDW,IEMG,ACWX,CWI,DFAX,EWJ,EWU,EWL,EWA,EWC,FLAX",
+    "notes": "Global diversification"
+  },
+  {
+    "id": 4,
+    "category": "REITs",
+    "allocation": 15,
+    "amount": 19200,
+    "suggestedAssets": "VNQ,AMT,PLD,SCHH,XLRE,FREL,IYR,RWR,USRT,REET,HPP,O,WPC,MAA",
+    "notes": "Income + real estate"
+  },
+  {
+    "id": 5,
+    "category": "Dividends & Defensives",
+    "allocation": 15,
+    "amount": 19200,
+    "suggestedAssets": "SCHD,JNJ,NEE,VIG,DGRO,VYM,HDV,SDY,NOBL,DIVO,SPLV,XLU,XLP,XLE,MOAT,PFFD,TLT",
+    "notes": "Stability + dividend income"
+  },
+  {
+    "id": 6,
+    "category": "Short-Term Bonds / Cash",
+    "allocation": 10,
+    "amount": 12800,
+    "suggestedAssets": "BIL, SHV, VGSH, ICSH, SCHO, MINT, NEAR, JPST, ULST, TFLO, SPTS",
+    "notes": "Capital preservation"
+  },
+  {
+    "id": 7,
+    "category": "Gold ETF",
+    "allocation": 5,
+    "amount": 6400,
+    "suggestedAssets": "GLD, IAU, SGOL, GLDM, AAAU, UGL, BAR",
+    "notes": "Inflation hedge"
+  },
+  {
+    "id": 8,
+    "category": "Bitcoin ETF",
+    "allocation": 5,
+    "amount": 6400,
+    "suggestedAssets": "IBIT, BITO, GBTC, FBTC, ARKB, EZBC, HODL",
+    "notes": "Asymmetric growth play"
+  }
+]
