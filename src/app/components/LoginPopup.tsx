@@ -37,7 +37,7 @@ function LoginPopup() {
           // Popup was closed manually
           if (intervalRef.current) clearInterval(intervalRef.current);
         }
-      } catch (err) {
+      } catch {
         // If cross-origin, will throw - ignore or handle gracefully
         // console.log("Can't access popup content yet", err);
       }
