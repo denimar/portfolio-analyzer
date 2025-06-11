@@ -8,9 +8,9 @@ function LoginPopup() {
   const handleLogin = () => {
     // 1. Open the window
     popupRef.current = window.open(
-      // "https://localhost:5055/",
+      "https://localhost:5055/",
       // "https://37.27.83.44:5055/",
-      "https://denimarlab.pro/login",
+      // "https://denimarlab.pro/login",
       "LoginWindow",
       "width=600,height=600"
     );
