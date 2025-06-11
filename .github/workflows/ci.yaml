@@ -27,7 +27,7 @@ jobs:
         port: ${{ secrets.PORT }}
         key: ${{ secrets.KEY }}
         source: "node_modules"
-        target: "~/modules/tradeninja"
+        target: "~/modules/portfolio-analyzer"
 
     - name: Copy files to Server
       uses: appleboy/scp-action@v0.1.7
@@ -37,5 +37,5 @@ jobs:
         port: ${{ secrets.PORT }}
         key: ${{ secrets.KEY }}
         source: "build"
-        target: "~/modules/tradeninja"
+        target: "~/modules/portfolio-analyzer"
         strip_components: 1
