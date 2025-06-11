@@ -47,3 +47,14 @@ https://eodhd.com/api/div/O.US?from=2000-01-01&api_token=668db638d82b55.72641194
 | `lg:`             | 1024px        | Tablets (landscape)/small laptops|
 | `xl:`             | 1280px        | Desktops                        |
 | `2xl:`            | 1536px        | Large desktops                  |
+
+
+---------------------------------------------------------------------------------------------
+# All Endpoints:
+https://www.interactivebrokers.com/campus/ibkr-api-page/webapi-doc/#per-endpoint-request-rate-limits-11
+
+https://localhost:5055/v1/api/iserver/auth/status (check whether I am connected)
+https://localhost:5055/v1/api/portfolio/accounts
+https://localhost:5055/v1/api/portfolio/U13793951/positions/0
+https://localhost:5055/v1/api/portfolio/U13793951/summary
+https://localhost:5055/v1/api/portfolio/U13793951/ledger
