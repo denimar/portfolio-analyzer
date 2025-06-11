@@ -17,6 +17,7 @@ function LoginPopup() {
 
     // 2. Start polling every 500ms
     intervalRef.current = setInterval(() => {
+      debugger
       try {
         // Check if popup is still open and has a document
         if (popupRef.current && !popupRef.current.closed) {
