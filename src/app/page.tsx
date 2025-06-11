@@ -2,9 +2,9 @@
 
 import PortfolioGrid from "./components/portfolio-grid/PortfolioGrid";
 import LoginPopup from "./components/LoginPopup";
-import { ibkrApi } from "./utils";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ibkrApi } from "@/lib/ibkrApi";
 
 export default function Home() {
   const [positions, setPositions] = useState<any[]>([]);
