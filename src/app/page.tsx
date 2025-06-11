@@ -20,7 +20,10 @@ export default function Home() {
   const [ibkrStatus, setIbkrStatus] = useState<IbkrStatusEnum>(IbkrStatusEnum.waiting);
 
   useEffect(() => {
+    alert('vai carregar o status do IBKR');
     axios.get('/api/ibkr/status').then(res => res.data).then(status => {
+      alert(JSON.stringify(status, null, 2));
+
       if (status.authenticated && status.connected) {
         setIbkrStatus(IbkrStatusEnum.connected);
       } else {
