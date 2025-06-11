@@ -10,8 +10,8 @@ export const GET = async (req: NextRequest) => {
       endpoint: '/portfolio/U13793951/positions/0',
       cookies: getCookiesFromRequest(req)
     });
-    return NextResponse.json(positions);
+    return NextResponse.json(positions || []);
   } catch (e: any) {
-    return NextResponse.json({ error: e.message }), { status: 500 };
+    return NextResponse.json({ error: e.message }, { status: 500 });
   }
 }
