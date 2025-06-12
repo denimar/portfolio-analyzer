@@ -12,6 +12,7 @@ export const GET = async (req: NextRequest) => {
     });
     return NextResponse.json(status);
   } catch (e: any) {
+    console.error("Error fetching IBKR status:", e.message);
     return NextResponse.json({ connected: false, authenticated: false, error: e.message });
   }
 }
