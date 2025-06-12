@@ -2,7 +2,7 @@ import getCookiesFromRequest from "@/lib/getCookiesFromRequest";
 import { ibkrApi } from "@/lib/ibkrApi";
 import { NextRequest, NextResponse } from "next/server";
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 export const GET = async (req: NextRequest) => {
   try {
