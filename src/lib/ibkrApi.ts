@@ -48,6 +48,7 @@ export async function ibkrApi<T>({
     fetchOptions.body = JSON.stringify(data);
   }
 
+  console.log(`Fetching IBKR API: ${method} ${url}`);
   const res = await fetch(url, fetchOptions);
 
   if (!res.ok) {
