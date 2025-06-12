@@ -36,13 +36,13 @@ export async function ibkrApi<T>({
       'Content-Type': 'application/json',
       ...headers,
     },
-    credentials: 'include', // In case you want to send cookies
+    // credentials: 'include', // In case you want to send cookies
   };
 
   if (cookies) {
     fetchOptions.headers = {
       ...fetchOptions.headers,
-      'Cookie': cookies,
+      // 'Cookie': cookies,
     };
   }
 
