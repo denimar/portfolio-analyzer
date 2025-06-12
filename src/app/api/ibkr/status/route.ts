@@ -1,7 +1,8 @@
 import { ibkrApi } from "@/lib/ibkrApi";
 import { NextRequest, NextResponse } from "next/server";
 
-if (process.env.NODE_ENV === 'development') process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+// if (process.env.NODE_ENV === 'development') 
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 export const GET = async (req: NextRequest) => {
   try {
