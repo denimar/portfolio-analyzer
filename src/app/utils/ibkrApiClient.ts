@@ -9,7 +9,7 @@ export interface IBKRApiOptions {
   params?: Record<string, string | number>; // For query params
   headers?: Record<string, string>;
   baseUrl?: string; // Default: 'https://localhost:5000/v1/api'
-  cookies?: string; // Pass session cookies if needed
+  // cookies?: string; // <-- REMOVE, not needed for browser code
 }
 
 export async function ibkrApiClient<T>({
@@ -33,24 +33,14 @@ export async function ibkrApiClient<T>({
       'Content-Type': 'application/json',
       ...headers,
     },
-    credentials: 'include', // In case you want to send cookies
+    credentials: 'include', // THIS is what sends cookies!
   };
-
-  const cookies = document.cookie; // Get cookies from the browser
-  if (cookies) {
-    fetchOptions.headers = {
-      ...fetchOptions.headers,
-      'Cookie': cookies,
-    };
-  }
 
   if (data && method !== 'GET') {
     fetchOptions.body = JSON.stringify(data);
   }
 
-  debugger
   const res = await fetch(url, fetchOptions);
-  debugger
 
   if (!res.ok) {
     const errorBody = await res.text();

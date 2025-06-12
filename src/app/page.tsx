@@ -4,7 +4,7 @@ import PortfolioGrid from "./components/portfolio-grid/PortfolioGrid";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { openIbkrLoginPopup } from "./utils";
+import { ibkrApiClient, makeRequest, openIbkrLoginPopup } from "./utils";
 import { Loader } from "lucide-react";
 
 enum IbkrStatusEnum {
@@ -20,8 +20,7 @@ export default function Home() {
   const [ibkrStatus, setIbkrStatus] = useState<IbkrStatusEnum>(IbkrStatusEnum.waiting);
 
   useEffect(() => {
-    alert('vai carregar o status do IBKR');
-    axios.get('/api/ibkr/status').then(res => res.data).then(status => {
+    makeRequest('/api/ibkr/status').then(status => {
       alert(JSON.stringify(status, null, 2));
 
       if (status.authenticated && status.connected) {
