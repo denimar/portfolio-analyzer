@@ -21,6 +21,8 @@ export async function ibkrApi<T>({
   baseUrl = 'https://localhost:5055/v1/api',
   cookies,
 }: IBKRApiOptions): Promise<T> {
+    console.log(`BaseURL: ${baseUrl}`);
+
   // Construct URL with params
   let url = `${baseUrl}${endpoint}`;
   if (params) {

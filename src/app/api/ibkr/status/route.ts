@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 if (process.env.NODE_ENV === 'development') process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 export const GET = async (req: NextRequest) => {
+  console.log("Fetching IBKR status...", 'Got Here');
   try {
     const status = await ibkrApi({
       endpoint: '/iserver/auth/status',
