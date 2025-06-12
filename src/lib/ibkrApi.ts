@@ -36,13 +36,13 @@ export async function ibkrApi<T>({
       'Content-Type': 'application/json',
       ...headers,
     },
-    credentials: 'include', // In case you want to send cookies
+    // credentials: 'include', // In case you want to send cookies
   };
 
   // if (cookies) {
     fetchOptions.headers = {
       ...fetchOptions.headers,
-      'Cookie': '__next_hmr_refresh_hash__=13; SBID=eyth8qwf3p6mau89ohj; device.info=eyJpZCI6ImQ4MDFlZmNmIiwibWFjIjoiMTY6NkQ6RUQ6RjI6OTQ6NjQifQ==; TABID=AM-jg5gdbv6x4q-1749766504453; XYZAB_AM.LOGIN=521f6e23178a1422a7d1e08c891a160eb9476fd0; XYZAB=521f6e23178a1422a7d1e08c891a160eb9476fd0'
+      // 'Cookie': '__next_hmr_refresh_hash__=13; SBID=eyth8qwf3p6mau89ohj; device.info=eyJpZCI6ImQ4MDFlZmNmIiwibWFjIjoiMTY6NkQ6RUQ6RjI6OTQ6NjQifQ==; TABID=AM-jg5gdbv6x4q-1749766504453; XYZAB_AM.LOGIN=521f6e23178a1422a7d1e08c891a160eb9476fd0; XYZAB=521f6e23178a1422a7d1e08c891a160eb9476fd0'
     // };
   }
 
