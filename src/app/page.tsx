@@ -19,17 +19,41 @@ export default function Home() {
   const [positions, setPositions] = useState<any[]>([]);
   const [ibkrStatus, setIbkrStatus] = useState<IbkrStatusEnum>(IbkrStatusEnum.waiting);
 
+  const waitTillConnected = () => {
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+        makeRequest('/api/ibkr/status').then(status => {
+          if (status.authenticated && status.connected) {
+            clearInterval(interval);
+            resolve(status);
+          }
+          console.log('Waiting for IBKR connection...');
+        }).catch(err => {
+          console.error("Error fetching IBKR status:", err);
+          clearInterval(interval);
+          resolve(null);
+        });
+      }, 1000);
+    });
+  }
+
   useEffect(() => {
     makeRequest('/api/ibkr/status').then(status => {
-      alert(JSON.stringify(status, null, 2));
-
       if (status.authenticated && status.connected) {
         setIbkrStatus(IbkrStatusEnum.connected);
+        loadPositions();
       } else {
-        setIbkrStatus(IbkrStatusEnum.disconnected);
-        openIbkrLoginPopup(() => {
-          setIbkrStatus(IbkrStatusEnum.connecting);
+        alert(JSON.stringify(status, null, 2) + '----' + 'Will Reconnect');
+        makeRequest('/api/ibkr/reconnect', { method: 'POST' }).then(async status => {
+          await waitTillConnected()
+          setIbkrStatus(IbkrStatusEnum.connected);
+          loadPositions();
         });
+
+        // setIbkrStatus(IbkrStatusEnum.disconnected);
+        // openIbkrLoginPopup(() => {
+        //   setIbkrStatus(IbkrStatusEnum.connecting);
+        // });
       }
     }).catch(err => {
       console.error("Error fetching IBKR status:", err);
