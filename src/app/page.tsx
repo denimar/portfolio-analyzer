@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { ibkrApiClient, makeRequest, openIbkrLoginPopup } from "./utils";
 import { Loader } from "lucide-react";
+import EnsureIbkrConnection from "./components/ensure-ibkr-connection";
 
 enum IbkrStatusEnum {
   waiting = 'waiting',
@@ -18,48 +19,6 @@ enum IbkrStatusEnum {
 export default function Home() {
   const [positions, setPositions] = useState<any[]>([]);
   const [ibkrStatus, setIbkrStatus] = useState<IbkrStatusEnum>(IbkrStatusEnum.waiting);
-
-  const waitTillConnected = () => {
-    return new Promise((resolve) => {
-      const interval = setInterval(() => {
-        makeRequest('/api/ibkr/status').then(status => {
-          if (status.authenticated && status.connected) {
-            clearInterval(interval);
-            resolve(status);
-          }
-          console.log('Waiting for IBKR connection...');
-        }).catch(err => {
-          console.error("Error fetching IBKR status:", err);
-          clearInterval(interval);
-          resolve(null);
-        });
-      }, 1000);
-    });
-  }
-
-  useEffect(() => {
-    makeRequest('/api/ibkr/status').then(status => {
-      if (status.authenticated && status.connected) {
-        setIbkrStatus(IbkrStatusEnum.connected);
-        loadPositions();
-      } else {
-        alert(JSON.stringify(status, null, 2) + '----' + 'Will Reconnect');
-        makeRequest('/api/ibkr/reconnect', { method: 'POST' }).then(async status => {
-          await waitTillConnected()
-          setIbkrStatus(IbkrStatusEnum.connected);
-          loadPositions();
-        });
-
-        // setIbkrStatus(IbkrStatusEnum.disconnected);
-        // openIbkrLoginPopup(() => {
-        //   setIbkrStatus(IbkrStatusEnum.connecting);
-        // });
-      }
-    }).catch(err => {
-      console.error("Error fetching IBKR status:", err);
-      setIbkrStatus(IbkrStatusEnum.error);
-    });
-  }, []);
 
   const loadPositions = async () => {
     const positions = await axios.get('/api/ibkr/positions').then(res => res.data)
@@ -76,27 +35,42 @@ export default function Home() {
     setPositions(positions);
   }
 
-  if (ibkrStatus !== IbkrStatusEnum.connected) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-500">Waiting for IBKR connection...</p>
-        <Loader className="animated-spin" />
-      </div>
-    );
+  const onIbkrConnected = async () => {
+    setIbkrStatus(IbkrStatusEnum.connected);
+  }
+
+  const onIbkrDisconnected = async () => {
+    setIbkrStatus(IbkrStatusEnum.disconnected);
+  }
+
+  const onIbkrError = async (errorMessage: string) => {
+    setIbkrStatus(IbkrStatusEnum.disconnected);
+    alert(errorMessage);
   }
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)] w-full h-full bg-gray-50">
-      <main className="flex flex-col gap-6 sm:gap-8 row-start-2 items-center sm:items-start w-full h-full max-w-screen-xl ">
-        <div>{ibkrStatus}</div>
-        <Button onClick={() => loadPositions()}>Load Positions</Button>
-        <div className="text-black">
-          <code>
-            {JSON.stringify(positions, null, 2)}
-          </code>
-        </div>
-        <PortfolioGrid netLiquidationValue={130000} />
-      </main>
-    </div>
+    <EnsureIbkrConnection onConnect={onIbkrConnected} onDisconnect={onIbkrDisconnected} onError={onIbkrError}>
+      {
+        ibkrStatus !== IbkrStatusEnum.connected ? (
+          <div className="flex items-center justify-center min-h-screen">
+            <p className="text-gray-500">Waiting for IBKR connection...</p>
+            <Loader className="animated-spin" />
+          </div>
+        ) : (
+          <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)] w-full h-full bg-gray-50">
+            <main className="flex flex-col gap-6 sm:gap-8 row-start-2 items-center sm:items-start w-full h-full max-w-screen-xl ">
+              <div>{ibkrStatus}</div>
+              <Button onClick={() => loadPositions()}>Load Positions</Button>
+              <div className="text-black">
+                <code>
+                  {JSON.stringify(positions, null, 2)}
+                </code>
+              </div>
+              <PortfolioGrid netLiquidationValue={130000} />
+            </main >
+          </div >
+        )
+      }
+    </EnsureIbkrConnection >
   );
 }
