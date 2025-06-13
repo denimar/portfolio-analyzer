@@ -25,6 +25,7 @@ const EnsureIbkrConnection: FC<EnsureIbkrConnectionProps> = ({ children, onConne
     return new Promise((resolve) => {
       const interval = setInterval(() => {
         makeRequest('/api/ibkr/status').then(status => {
+          console.log('IBKR status:', status);
           if (status.authenticated && status.connected) {
             setIbkrStatus(IbkrStatusEnum.connected);
             clearInterval(interval);

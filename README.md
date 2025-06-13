@@ -58,3 +58,10 @@ https://localhost:5055/v1/api/portfolio/accounts
 https://localhost:5055/v1/api/portfolio/U13793951/positions/0
 https://localhost:5055/v1/api/portfolio/U13793951/summary
 https://localhost:5055/v1/api/portfolio/U13793951/ledger
+
+
+
+-----------
+SSH:
+ssh -i ~/.ssh/denimar-ssh-key root@37.27.83.44
+ssh -i ~/.ssh/denimar-ssh-key -L 5055:localhost:5055 root@37.27.83.44
