@@ -16,7 +16,7 @@ const IbkrConnectModal: FC<IbkrConnectModalProps> = ({ open, setOpen }) => {
       open={open}
       content={(
         <div className="flex flex-col items-center gap-2 px-4 py-4 border border-red-400 w-full h-full">
-          <iframe src="https://localhost:1443" sandbox="allow-scripts allow-same-origin" />
+          <iframe src="iframe-test.html" sandbox="allow-scripts allow-same-origin" />
         </div>
       )}
       actionButtons={(
