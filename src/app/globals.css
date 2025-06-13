@@ -120,3 +120,24 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+/* unvisited link */
+a:link {
+  color: #0284c7;
+}
+
+/* visited link */
+a:visited {
+  color: #0284c7;
+}
+
+/* mouse over link */
+a:hover {
+  color: #0ea5e9;
+}
+
+/* selected link */
+a:active {
+  color: #0284c7;
+}

@@ -4,12 +4,13 @@ import { formatNumber } from '@/app/utils';
 
 type PortfolioGridProps = {
   netLiquidationValue: number;
+  positions: any[]
 }
 
-const PortfolioGrid: FC<PortfolioGridProps> = ({ netLiquidationValue }) => {
+const PortfolioGrid: FC<PortfolioGridProps> = ({ netLiquidationValue, positions }) => {
 
   return (
-    <div className="overflow-x-auto bg-white py-2 px-6 rounded-2xl shadow-md border-t border-t-gray-200 w-full">
+    <div className="overflow-x-auto bg-white py-2 px-6full">
       <table className="min-w-full text-left border-collapse text-gray-800">
         <thead>
           <tr className="font-semibold text-xs border-b border-b-gray-300">

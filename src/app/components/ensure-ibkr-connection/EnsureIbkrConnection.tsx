@@ -46,15 +46,10 @@ const EnsureIbkrConnection: FC<EnsureIbkrConnectionProps> = ({ children, onConne
 
   useEffect(() => {
     makeRequest('/api/ibkr/status').then(status => {
-      debugger
       if (status.authenticated && status.connected) {
-        debugger
         setIbkrStatus(IbkrStatusEnum.connected);
-        debugger
         onConnect();
-        debugger
       } else {
-        debugger
         const statusStr = JSON.stringify(status, null, 2)
         const needToReconnect = !statusStr.includes('401')
         if (needToReconnect) {
@@ -63,7 +58,6 @@ const EnsureIbkrConnection: FC<EnsureIbkrConnectionProps> = ({ children, onConne
             await waitTillConnected()
           });
         } else {
-          debugger
           setIbkrStatus(IbkrStatusEnum.disconnected);
         }
       }
