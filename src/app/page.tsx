@@ -7,8 +7,16 @@ import EnsureIbkrConnection from "./components/ensure-ibkr-connection";
 import PositionsPanel from "./PositionsPanel/PositionsPanel";
 import DashboardWidget from "./components/DashboardWidget";
 import BalancesPanel from "./BalancesPanel";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
+import AppHeader from "./components/AppHeader";
 
 export default function Home() {
+  const [currentTab, setCurrentTab] = useState<string>("allocation_strategy");
   const [positions, setPositions] = useState<any[]>([]);
   const [accountSummary, setAccountSummary] = useState<any>({});
   const [watchLists, setWatchLists] = useState<any>([]);
@@ -30,21 +38,22 @@ export default function Home() {
 
   return (
     <EnsureIbkrConnection onConnect={onIbkrConnected}>
-      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen gap-8 sm:gap-16 w-full h-full bg-gray-100 select-none">
-        <main className="flex flex-col gap-3 sm:gap-3 row-start-2 items-center sm:items-start w-full h-full max-w-screen-xl ">
-          <div className="flex flex-row gap-3 w-full">
-            <DashboardWidget title="Balances" className="w-[350px]">
-              <BalancesPanel balances={accountSummary} />
-            </DashboardWidget>
-            <DashboardWidget title="Portfolio" className="flex flex-1">
-              <PositionsPanel positions={positions} />
-            </DashboardWidget>
-          </div>
-          <DashboardWidget title="Strategy" className="w-full">
+      <AppHeader accountSummary={accountSummary} />
+      <div className="p-2">
+        <Tabs defaultValue="allocation_strategy">
+          <TabsList>
+          <TabsTrigger value="my_allocation">Allocation</TabsTrigger>            
+            <TabsTrigger value="allocation_strategy">Strategy</TabsTrigger>
+            <TabsTrigger value="positions">Positions</TabsTrigger>
+          </TabsList>
+          <TabsContent value='allocation_strategy'>
             <PortfolioGrid totalCash={accountSummary.totalCash} positions={positions} watchLists={watchLists} />
-          </DashboardWidget>
-        </main >
-      </div >
+          </TabsContent>
+          <TabsContent value='positions'>
+            <PositionsPanel positions={positions} />
+          </TabsContent>
+        </Tabs>
+      </div>
     </EnsureIbkrConnection >
   );
 }

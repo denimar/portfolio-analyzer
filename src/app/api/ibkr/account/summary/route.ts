@@ -22,7 +22,6 @@ export const GET = async (req: NextRequest) => {
       realizedPNL: realizedpnl
     });
   } catch (e: any) {
-    debugger
     return NextResponse.json({ error: e.message }, { status: 500 });
   }
 }

@@ -68,7 +68,6 @@ const EnsureIbkrConnection: FC<EnsureIbkrConnectionProps> = ({ children, onConne
   }, []);
 
   const connectToIbkr = async () => {
-    debugger
     setIbkrStatus(IbkrStatusEnum.connecting);
     if (ibkrStatus === IbkrStatusEnum.disconnected) {
       window.open('https://localhost:5055');
