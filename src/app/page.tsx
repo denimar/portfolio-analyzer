@@ -41,7 +41,7 @@ export default function Home() {
             </DashboardWidget>
           </div>
           <DashboardWidget title="Strategy" className="w-full">
-            <PortfolioGrid netLiquidationValue={130000} positions={positions} watchLists={watchLists} />
+            <PortfolioGrid totalCash={accountSummary.totalCash} positions={positions} watchLists={watchLists} />
           </DashboardWidget>
         </main >
       </div >

@@ -2,15 +2,19 @@ import { FC } from 'react';
 import { formatNumber } from '@/app/utils';
 
 type PortfolioGridProps = {
-  netLiquidationValue: number;
+  totalCash: number;
   positions: any[]
   watchLists: any[]
 }
 
-const PortfolioGrid: FC<PortfolioGridProps> = ({ netLiquidationValue, positions, watchLists }) => {
+const PortfolioGrid: FC<PortfolioGridProps> = ({ totalCash, positions, watchLists }) => {
+
+  debugger
+  const netLiquidationValue = totalCash + positions.reduce((acc, pos) => acc + (pos.mktPrice * (pos.position || 0)), 0);
 
   return (
     <div className="overflow-x-auto bg-white py-2 px-6full">
+      <div>CAsh: {netLiquidationValue}</div>
       <table className="min-w-full text-left border-collapse text-gray-800">
         <thead>
           <tr className="font-semibold text-xs border-b border-b-gray-300">
