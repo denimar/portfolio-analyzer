@@ -11,14 +11,17 @@ import BalancesPanel from "./BalancesPanel";
 export default function Home() {
   const [positions, setPositions] = useState<any[]>([]);
   const [accountSummary, setAccountSummary] = useState<any>({});
+  const [watchLists, setWatchLists] = useState<any>([]);
 
   const loadInitialData = async () => {
-    const [fetchedPositions, fetchedAccountSummary] = await Promise.all([
+    const [fetchedPositions, fetchedAccountSummary, fetchedWatchLists] = await Promise.all([
       axios.get('/api/ibkr/positions').then(res => res.data),
-      axios.get('/api/ibkr/account/summary').then(res => res.data)
+      axios.get('/api/ibkr/account/summary').then(res => res.data),
+      axios.get('/api/ibkr/watchlist').then(res => res.data)
     ]);
     setPositions(fetchedPositions);
     setAccountSummary(fetchedAccountSummary);
+    setWatchLists(fetchedWatchLists);
   }
 
   const onIbkrConnected = async () => {
@@ -38,7 +41,7 @@ export default function Home() {
             </DashboardWidget>
           </div>
           <DashboardWidget title="Strategy" className="w-full">
-            <PortfolioGrid netLiquidationValue={130000} positions={positions} />
+            <PortfolioGrid netLiquidationValue={130000} positions={positions} watchLists={watchLists} />
           </DashboardWidget>
         </main >
       </div >

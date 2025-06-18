@@ -1,13 +1,13 @@
 import { FC } from 'react';
-import portfolio from './portfolio.json';
 import { formatNumber } from '@/app/utils';
 
 type PortfolioGridProps = {
   netLiquidationValue: number;
   positions: any[]
+  watchLists: any[]
 }
 
-const PortfolioGrid: FC<PortfolioGridProps> = ({ netLiquidationValue, positions }) => {
+const PortfolioGrid: FC<PortfolioGridProps> = ({ netLiquidationValue, positions, watchLists }) => {
 
   return (
     <div className="overflow-x-auto bg-white py-2 px-6full">
@@ -22,12 +22,12 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({ netLiquidationValue, positions 
           </tr>
         </thead>
         <tbody>
-          {portfolio.map((row) => (
+          {watchLists.map((row) => (
             <tr key={row.id} className="border-b last:border-0 hover:bg-gray-50 text-xs">
               <td className="px-4 py-3 font-semibold">{row.category}</td>
               <td className="px-4 py-3 text-right">{formatNumber(netLiquidationValue * row.allocation / 100)} - {row.allocation.toString()}%</td>
               <td className="px-4 py-3 text-right">{formatNumber(netLiquidationValue * row.allocation / 100)} - {row.allocation.toString()}%</td>              
-              <td className="px-4 py-3">{row.suggestedAssets.replaceAll(",", ", ")}</td>
+              <td className="px-4 py-3">{row.items.map((itm: any) => itm.ticker.replaceAll(",", ", ")).join(', ')}</td>
               <td className="px-4 py-3 text-gray-600">{row.notes}</td>
             </tr>
           ))}
