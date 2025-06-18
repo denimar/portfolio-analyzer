@@ -5,8 +5,6 @@ import { useState } from "react";
 import axios from "axios";
 import EnsureIbkrConnection from "./components/ensure-ibkr-connection";
 import PositionsPanel from "./PositionsPanel/PositionsPanel";
-import DashboardWidget from "./components/DashboardWidget";
-import BalancesPanel from "./BalancesPanel";
 import {
   Tabs,
   TabsContent,
