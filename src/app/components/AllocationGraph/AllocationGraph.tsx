@@ -13,7 +13,7 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-const renderBarLabel = (netLiquidationValue: number,  props: any) => {
+const renderBarLabel = (netLiquidationValue: number, props: any) => {
   const { x, y, width, value } = props
   const line1 = `${value.toFixed(1)}%`
   const line2 = formatNumber(netLiquidationValue * (value / 100)) // Example calculation for the second line
@@ -54,27 +54,49 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
 
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
+      const category = payload[0].payload.category
+      const watchList = watchLists.find(wl => wl.category === category)
+      const positionsInWi = watchList ? positions.filter(pos => watchList.items.some((wli: any) => pos.contractDesc === wli.ticker)) : [];
       return (
-        <div className="bg-sky-50 border rounded shadow p-2 text-sm">
-          <div className="font-semibold border-b border-b-blue-200 mb-2">{payload[0].payload.category}</div>
+        <div className="bg-sky-50 border rounded shadow text-sm">
+          <div className="font-semibold border-b border-b-blue-200 mb-2 p-2 text-base text-sky-900">{payload[0].payload.category}</div>
           <table>
             <tr>
-              <td className="w-[65px] pr-4 font-semibold">Expected:</td>
-              <td className='w-[50px] text-right'>{payload[0].payload.expected.toFixed(1)}%</td>
-              <td className='w-[100px] text-right'>{formatNumber(netLiquidationValue * payload[0].payload.expected / 100)}</td>
+              <td className="w-[65px] pr-4 font-semibold py-1 px-2">Expected:</td>
+              <td className='w-[50px] text-right py-1 px-2'>{payload[0].payload.expected.toFixed(1)}%</td>
+              <td className='w-[100px] text-right py-1 px-2'>{formatNumber(netLiquidationValue * payload[0].payload.expected / 100)}</td>
             </tr>
             <tr>
-              <td className="w-[65px] pr-4 font-semibold">Actual:</td>
-              <td className='w-[50px] text-right'>{payload[0].payload.actual.toFixed(1)}%</td>
-              <td className='w-[100px] text-right'>{formatNumber(netLiquidationValue * payload[0].payload.actual / 100)}</td>
+              <td className="w-[65px] pr-4 font-semibold py-1 px-2">Actual:</td>
+              <td className='w-[50px] text-right py-1 px-2'>{payload[0].payload.actual.toFixed(1)}%</td>
+              <td className='w-[100px] text-right py-1 px-2'>{formatNumber(netLiquidationValue * payload[0].payload.actual / 100)}</td>
             </tr>
+            {
+              positionsInWi.length > 0 && (
+                <tr className='bg-white'>
+                  <td colSpan={3} className='pt-2 pb-2 px-0'>
+                    <table className='w-full'>
+                      {
+                        positionsInWi.map(pos => (
+                          <tr key={pos.contractDesc} className='text-gray-600'>
+                            <td className="w-[65px] pr-4 px-2">{pos.contractDesc}</td>
+                            <td className='w-[65px] text-right py-1 px-2'>{((pos.mktPrice * (pos.position || 0)) / netLiquidationValue * 100).toFixed(1)}%</td>
+                            <td className='w-[100px] text-right px-2'>{formatNumber(pos.mktPrice * (pos.position || 0))}</td>
+                          </tr>
+                        ))
+                      }
+                    </table>
+                  </td>
+                </tr>
+              )
+            }
           </table>
         </div>
       )
     }
     return null
   }
-  
+
   const uncategorizedAllocation = positions.filter(pos => {
     const hasPositionsInCategory = watchLists.some(wl => {
       return wl.items.some((itm: any) => itm.ticker === pos.contractDesc);
@@ -92,7 +114,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
   }).concat([{
     category: "Uncategorized",
     expected: 0,
-    actual:  uncategorizedAllocationValue * 100 / netLiquidationValue
+    actual: uncategorizedAllocationValue * 100 / netLiquidationValue
   }]).concat([{
     category: "Cash",
     expected: 0,
