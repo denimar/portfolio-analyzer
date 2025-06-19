@@ -10,6 +10,17 @@ type PortfolioGridProps = {
 const PortfolioGrid: FC<PortfolioGridProps> = ({ totalCash, positions, watchLists }) => {
   // const netLiquidationValue = totalCash + positions.reduce((acc, pos) => acc + (pos.mktPrice * (pos.position || 0)), 0);
 
+  if (watchLists.length > 0) {
+    const aloc = watchLists.map(wl => {
+      return {
+        category: wl.category,
+        expected: wl.allocation,
+        actual: wl.allocation + Math.random() * 10 - 5,
+      }
+    })
+    console.log(JSON.stringify(aloc, null, 2));
+  }
+
   return (
     <div className="overflow-x-auto bg-white px-6full">
       {/* <div>CAsh: {netLiquidationValue}</div> */}

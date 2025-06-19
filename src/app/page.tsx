@@ -12,9 +12,10 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import AppHeader from "./components/AppHeader";
+import AllocationGraph from "./components/AllocationGraph";
 
 export default function Home() {
-  const [currentTab, setCurrentTab] = useState<string>("allocation_strategy");
+  const [currentTab, setCurrentTab] = useState<string>("my_allocation");
   const [positions, setPositions] = useState<any[]>([]);
   const [accountSummary, setAccountSummary] = useState<any>({});
   const [watchLists, setWatchLists] = useState<any>([]);
@@ -38,12 +39,15 @@ export default function Home() {
     <EnsureIbkrConnection onConnect={onIbkrConnected}>
       <AppHeader accountSummary={accountSummary} />
       <div className="p-2">
-        <Tabs defaultValue="allocation_strategy">
+        <Tabs defaultValue="my_allocation">
           <TabsList>
-          <TabsTrigger value="my_allocation">Allocation</TabsTrigger>            
+            <TabsTrigger value="my_allocation">Allocation</TabsTrigger>
             <TabsTrigger value="allocation_strategy">Strategy</TabsTrigger>
             <TabsTrigger value="positions">Positions</TabsTrigger>
           </TabsList>
+          <TabsContent value='my_allocation'>
+            <AllocationGraph totalCash={accountSummary.totalCash} positions={positions} watchLists={watchLists} />
+          </TabsContent>
           <TabsContent value='allocation_strategy'>
             <PortfolioGrid totalCash={accountSummary.totalCash} positions={positions} watchLists={watchLists} />
           </TabsContent>

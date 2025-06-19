@@ -1,6 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+html {
+  overflow-x: hidden;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

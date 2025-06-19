@@ -1,0 +1,162 @@
+'use client'
+
+import { formatNumber } from '@/app/utils'
+import React, { FC } from 'react'
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer
+} from 'recharts'
+
+const CustomTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length) {
+    debugger
+    return (
+      // <div className='border rounded shadow text-lg font-semibold bg-blue-50'>
+      //   <div className='border-b border-b-blue-200 p-2'>{payload[0].payload.category}</div>
+      //   <div className='p-2 text-sm bg-white'>
+      //     <table className="">
+      //       <tbody>
+      //         <tr>
+      //           <td className="px-2 py-1 font-semibold bg-gray-50">Expected</td>
+      //           <td className="px-2 py-1">{payload[0].payload.expected.toFixed(1)}%</td>
+      //         </tr>
+      //         <tr>
+      //           <td className="px-2 py-1 font-semibold bg-gray-50">Actual</td>
+      //           <td className="px-2 py-1">{payload[0].payload.actual.toFixed(1)}%</td>
+      //         </tr>
+      //       </tbody>
+      //     </table>
+      //   </div>
+      // </div>
+
+
+
+      <div className="bg-white border rounded shadow p-2 text-sm">
+        <p className="font-semibold">{payload[0].payload.category}</p>
+        <p>Expected: {payload[0].payload.expected.toFixed(1)}%</p>
+        <p>Actual: {payload[0].payload.actual.toFixed(1)}%</p>
+      </div>
+    )
+  }
+  return null
+}
+
+const renderBarLabel = (netLiquidationValue: number,  props: any) => {
+  const { x, y, width, value } = props
+  const line1 = `${value.toFixed(1)}%`
+  const line2 = formatNumber(netLiquidationValue * (value / 100)) // Example calculation for the second line
+  return (
+    <text
+      x={x + width / 2}
+      y={y - 20} // shift upward to make space for both lines
+      fill="#374151"
+      fontSize={12}
+      fontWeight={500}
+      textAnchor="middle"
+      fontFamily="Inter, Helvetica Neue, sans-serif"
+    >
+      <tspan x={x + width / 2} dy="0">{line1}</tspan>
+      <tspan x={x + width / 2} dy="14">{line2}</tspan> {/* Adjust line height */}
+    </text>
+  )
+}
+type AllocationGraphProps = {
+  totalCash: number;
+  positions: any[]
+  watchLists: any[]
+}
+
+const getActualAllocation = (netLiquidationValue: number, positions: any[], watchList: any): number => {
+  const totalInCategory = positions.reduce((acc, pos) => {
+    const itemsInCategory = watchList.items.filter((itm: any) => itm.ticker === pos.contractDesc);
+    const totalPosValue = itemsInCategory.reduce((itemAcc: number) => itemAcc + (pos.mktPrice * (pos.position || 0)), 0);
+    acc += totalPosValue;
+    return acc;
+  }, 0);
+  return totalInCategory / netLiquidationValue * 100;
+}
+
+const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watchLists }) => {
+
+  const netLiquidationValue = totalCash + positions.reduce((acc, pos) => acc + (pos.mktPrice * (pos.position || 0)), 0);
+
+  const uncategorizedAllocation = positions.filter(pos => {
+    const hasPositionsInCategory = watchLists.some(wl => {
+      return wl.items.some((itm: any) => itm.ticker === pos.contractDesc);
+    });
+    return !hasPositionsInCategory;
+  });
+  const uncategorizedAllocationValue = uncategorizedAllocation.reduce((acc, wl) => acc + wl.mktValue, 0);
+  const data = watchLists.map(wl => {
+    const actualAllocation = getActualAllocation(netLiquidationValue, positions, wl);
+    return {
+      category: wl.category,
+      expected: wl.allocation,
+      actual: actualAllocation
+    }
+  }).concat([{
+    category: "Uncategorized",
+    expected: 0,
+    actual:  uncategorizedAllocationValue * 100 / netLiquidationValue
+  }]).concat([{
+    category: "Cash",
+    expected: 0,
+    actual: totalCash * 100 / netLiquidationValue
+  }])
+
+  const handleBarClick = (data: any, index: number) => {
+    console.log("Bar clicked:", data)
+    alert(`Category: ${data.category}\nExpected: ${data.expected.toFixed(1)}%\nActual: ${data.actual.toFixed(1)}%`)
+  }
+
+  return (
+    <div className="flex flex-1 w-full absolute h-[calc(100%-180px)] p-4">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={data}>
+          <CartesianGrid vertical={false} horizontal={false} strokeDasharray="3 3" stroke="#e0e0e0" />
+          <XAxis
+            dataKey="category"
+            angle={-20}
+            textAnchor="end"
+            interval={0}
+            height={90}
+            tick={{
+              fontSize: 13,
+              fontFamily: 'Inter, Helvetica Neue, sans-serif',
+              fill: '#374151',
+              fontWeight: 500
+            }}
+          />
+          <YAxis
+            tick={{ fontSize: 12 }}
+            label={{
+              value: 'Allocation (%)',
+              angle: -90,
+              position: 'insideLeft',
+              offset: 10,
+              style: {
+                textAnchor: 'middle',
+                fontSize: 13,
+                fill: '#374151',
+                fontFamily: 'Inter, Helvetica Neue, sans-serif',
+                fontWeight: 500
+              }
+            }}
+          />
+          <Tooltip content={<CustomTooltip />} />
+          <Legend verticalAlign="top" height={36} />
+          <Bar dataKey="expected" name="Expected %" fill="#a6a6a6" radius={[4, 4, 0, 0]} label={(props) => renderBarLabel(netLiquidationValue, props)} onClick={handleBarClick} />
+          <Bar dataKey="actual" name="Actual %" fill="#336699" radius={[4, 4, 0, 0]} label={(props) => renderBarLabel(netLiquidationValue, props)} onClick={handleBarClick} />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  )
+}
+
+export default AllocationGraph
