@@ -52,11 +52,22 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
 
   const netLiquidationValue = totalCash + positions.reduce((acc, pos) => acc + (pos.mktPrice * (pos.position || 0)), 0);
 
+  const getUncategorizedPositions = () => {
+    return positions.filter(pos => {
+      const hasPositionsInCategory = watchLists.some(wl => {
+        return wl.items.some((itm: any) => itm.ticker === pos.contractDesc);
+      });
+      return !hasPositionsInCategory;
+    });
+  }
+
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const category = payload[0].payload.category
+      const isUncategorized = category === "Uncategorized"      
       const watchList = watchLists.find(wl => wl.category === category)
-      const positionsInWi = watchList ? positions.filter(pos => watchList.items.some((wli: any) => pos.contractDesc === wli.ticker)) : [];
+      const items = isUncategorized ? getUncategorizedPositions() : watchList ? positions.filter(pos => watchList.items.some((wli: any) => pos.contractDesc === wli.ticker)) : [];
+      
       return (
         <div className="bg-sky-50 border rounded shadow text-sm">
           <div className="font-semibold border-b border-b-blue-200 mb-2 p-2 text-base text-sky-900">{payload[0].payload.category}</div>
@@ -72,12 +83,12 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
               <td className='w-[100px] text-right py-1 px-2'>{formatNumber(netLiquidationValue * payload[0].payload.actual / 100)}</td>
             </tr>
             {
-              positionsInWi.length > 0 && (
+              items.length > 0 && (
                 <tr className='bg-white'>
                   <td colSpan={3} className='pt-2 pb-2 px-0'>
                     <table className='w-full'>
                       {
-                        positionsInWi.map(pos => (
+                        items.map(pos => (
                           <tr key={pos.contractDesc} className='text-gray-600'>
                             <td className="w-[65px] pr-4 px-2">{pos.contractDesc}</td>
                             <td className='w-[65px] text-right py-1 px-2'>{((pos.mktPrice * (pos.position || 0)) / netLiquidationValue * 100).toFixed(1)}%</td>
@@ -128,7 +139,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
           <CartesianGrid vertical={false} horizontal={false} strokeDasharray="3 3" stroke="#e0e0e0" />
           <XAxis
             dataKey="category"
-            angle={-20}
+            angle={-30}
             textAnchor="end"
             interval={0}
             height={90}

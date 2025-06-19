@@ -44,6 +44,7 @@ export default function Home() {
             <TabsTrigger value="my_allocation">Allocation</TabsTrigger>
             <TabsTrigger value="allocation_strategy">Strategy</TabsTrigger>
             <TabsTrigger value="positions">Positions</TabsTrigger>
+            <TabsTrigger value="performance">Performance</TabsTrigger>
           </TabsList>
           <TabsContent value='my_allocation'>
             <AllocationGraph totalCash={accountSummary.totalCash} positions={positions} watchLists={watchLists} />
@@ -53,6 +54,9 @@ export default function Home() {
           </TabsContent>
           <TabsContent value='positions'>
             <PositionsPanel positions={positions} />
+          </TabsContent>
+          <TabsContent value='performance'>
+            <div className="p-4">Performance (Coming soon...)</div>
           </TabsContent>
         </Tabs>
       </div>
