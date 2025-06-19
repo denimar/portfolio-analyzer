@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { formatNumber } from "../utils"
+import { condColor, formatNumber } from "../utils"
 
 type PositionsPanelProps = {
   positions: any[]
@@ -38,7 +38,7 @@ const PositionsPanel: FC<PositionsPanelProps> = ({ positions }) => {
               </td>
               <td className="px-4 py-3 text-center">{position.position}</td>
               <td className="px-4 py-3 text-right">{formatNumber(position.mktValue)}</td>
-              <td className="px-4 py-3 text-right">{formatNumber(position.unrealizedPnl)}</td>
+              <td className={`px-4 py-3 text-right ${condColor(position.unrealizedPnl)}`}>{formatNumber(position.unrealizedPnl)}</td>
               <td className="px-4 py-3 text-right">{formatNumber(position.mktPrice)}</td>
             </tr>
           ))}
