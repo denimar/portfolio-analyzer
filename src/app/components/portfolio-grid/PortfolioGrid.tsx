@@ -23,7 +23,6 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({ totalCash, positions, watchList
 
   return (
     <div className="overflow-x-auto bg-white px-6full">
-      {/* <div>CAsh: {netLiquidationValue}</div> */}
       <table className="min-w-full text-left border-collapse text-gray-800">
         <thead>
           <tr className="font-semibold text-xs border-b border-b-gray-300">
@@ -44,6 +43,27 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({ totalCash, positions, watchList
           ))}
         </tbody>
       </table>
+      <div className='w-full flex flex-col items-center text-sky-900 border-t border-t-sky-200 p-4 bg-sky-50 h-full'>
+        <div className='w-[750px]'>
+          <div className='w-full font-bold text-lg text-center'>Dollar Cost Averaging (DCA)</div>
+          <div className='mt-2 w-full flex flex-col space-y-1 p-2 items-center'>
+            <span className='font-semibold mr-2'>Rules:</span>
+            <span>1. Long-term investment.</span>
+            <span>2. Monthly contributions</span>
+            <span>3. Indicators: EMA 100, Bollinger Bands and Stochastic RSI</span>
+          </div>
+          <div className='mt-2 w-full flex flex-col space-y-1 p-2 items-center'>
+            <span className='font-semibold mr-2'>Only Buy When:</span>
+            <span>1. Stochastic RSI is oversold.</span>
+            <span>2. Price is bellow or close to EMA 100</span>
+            <span>3. Price is bellow Bollinger Lower Band</span>
+          </div>
+          <div className='mt-2 w-full flex flex-col space-y-1 p-2 items-center'>
+            <span className='font-semibold mr-2'>Only Sell When:</span>
+            <span>1. Price is above Bollinger Upper Band</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
