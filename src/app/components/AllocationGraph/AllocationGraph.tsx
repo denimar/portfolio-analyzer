@@ -61,7 +61,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
             <tr>
               <td className="w-[65px] pr-4 font-semibold">Expected:</td>
               <td className='w-[50px] text-right'>{payload[0].payload.expected.toFixed(1)}%</td>
-              <td className='w-[100px] text-right'>{formatNumber(32154)}</td>
+              <td className='w-[100px] text-right'>{formatNumber(netLiquidationValue * payload[0].payload.expected / 100)}</td>
             </tr>
             <tr>
               <td className="w-[65px] pr-4 font-semibold">Actual:</td>
