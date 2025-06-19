@@ -13,7 +13,7 @@ export const GET = async (req: NextRequest) => {
     },
     {
       id: '116', //Tech & Thematic
-      allocation: 10,
+      allocation: 15,
       notes: 'Growth-focused assets'
     },
     {
@@ -43,7 +43,7 @@ export const GET = async (req: NextRequest) => {
     },
     {
       id: '122', //Bitcoin ETF
-      allocation: 10,
+      allocation: 5,
       notes: 'Asymmetric growth play'
     },
   ]
