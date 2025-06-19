@@ -13,40 +13,6 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-const CustomTooltip = ({ active, payload }: any) => {
-  if (active && payload && payload.length) {
-    debugger
-    return (
-      // <div className='border rounded shadow text-lg font-semibold bg-blue-50'>
-      //   <div className='border-b border-b-blue-200 p-2'>{payload[0].payload.category}</div>
-      //   <div className='p-2 text-sm bg-white'>
-      //     <table className="">
-      //       <tbody>
-      //         <tr>
-      //           <td className="px-2 py-1 font-semibold bg-gray-50">Expected</td>
-      //           <td className="px-2 py-1">{payload[0].payload.expected.toFixed(1)}%</td>
-      //         </tr>
-      //         <tr>
-      //           <td className="px-2 py-1 font-semibold bg-gray-50">Actual</td>
-      //           <td className="px-2 py-1">{payload[0].payload.actual.toFixed(1)}%</td>
-      //         </tr>
-      //       </tbody>
-      //     </table>
-      //   </div>
-      // </div>
-
-
-
-      <div className="bg-white border rounded shadow p-2 text-sm">
-        <p className="font-semibold">{payload[0].payload.category}</p>
-        <p>Expected: {payload[0].payload.expected.toFixed(1)}%</p>
-        <p>Actual: {payload[0].payload.actual.toFixed(1)}%</p>
-      </div>
-    )
-  }
-  return null
-}
-
 const renderBarLabel = (netLiquidationValue: number,  props: any) => {
   const { x, y, width, value } = props
   const line1 = `${value.toFixed(1)}%`
@@ -86,6 +52,29 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
 
   const netLiquidationValue = totalCash + positions.reduce((acc, pos) => acc + (pos.mktPrice * (pos.position || 0)), 0);
 
+  const CustomTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-sky-50 border rounded shadow p-2 text-sm">
+          <div className="font-semibold border-b border-b-blue-200 mb-2">{payload[0].payload.category}</div>
+          <table>
+            <tr>
+              <td className="w-[65px] pr-4 font-semibold">Expected:</td>
+              <td className='w-[50px] text-right'>{payload[0].payload.expected.toFixed(1)}%</td>
+              <td className='w-[100px] text-right'>{formatNumber(32154)}</td>
+            </tr>
+            <tr>
+              <td className="w-[65px] pr-4 font-semibold">Actual:</td>
+              <td className='w-[50px] text-right'>{payload[0].payload.actual.toFixed(1)}%</td>
+              <td className='w-[100px] text-right'>{formatNumber(netLiquidationValue * payload[0].payload.actual / 100)}</td>
+            </tr>
+          </table>
+        </div>
+      )
+    }
+    return null
+  }
+  
   const uncategorizedAllocation = positions.filter(pos => {
     const hasPositionsInCategory = watchLists.some(wl => {
       return wl.items.some((itm: any) => itm.ticker === pos.contractDesc);
@@ -109,11 +98,6 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
     expected: 0,
     actual: totalCash * 100 / netLiquidationValue
   }])
-
-  const handleBarClick = (data: any, index: number) => {
-    console.log("Bar clicked:", data)
-    alert(`Category: ${data.category}\nExpected: ${data.expected.toFixed(1)}%\nActual: ${data.actual.toFixed(1)}%`)
-  }
 
   return (
     <div className="flex flex-1 w-full absolute h-[calc(100%-180px)] p-4">
@@ -151,8 +135,8 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
           />
           <Tooltip content={<CustomTooltip />} />
           <Legend verticalAlign="top" height={36} />
-          <Bar dataKey="expected" name="Expected %" fill="#a6a6a6" radius={[4, 4, 0, 0]} label={(props) => renderBarLabel(netLiquidationValue, props)} onClick={handleBarClick} />
-          <Bar dataKey="actual" name="Actual %" fill="#336699" radius={[4, 4, 0, 0]} label={(props) => renderBarLabel(netLiquidationValue, props)} onClick={handleBarClick} />
+          <Bar dataKey="expected" name="Expected %" fill="#a6a6a6" radius={[4, 4, 0, 0]} label={(props) => renderBarLabel(netLiquidationValue, props)} />
+          <Bar dataKey="actual" name="Actual %" fill="#336699" radius={[4, 4, 0, 0]} label={(props) => renderBarLabel(netLiquidationValue, props)} />
         </BarChart>
       </ResponsiveContainer>
     </div>
