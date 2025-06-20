@@ -28,7 +28,13 @@ const renderBarLabel = (netLiquidationValue: number, props: any) => {
       fontFamily="Inter, Helvetica Neue, sans-serif"
     >
       <tspan x={x + width / 2} dy="0">{line1}</tspan>
-      <tspan x={x + width / 2} dy="14">{line2}</tspan> {/* Adjust line height */}
+      <tspan 
+        x={x + width / 2} 
+        dy="14"
+        fontSize={9}
+      >
+        {line2}
+      </tspan> {/* Adjust line height */}
     </text>
   )
 }
@@ -54,6 +60,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
 
   const getUncategorizedPositions = () => {
     return positions.filter(pos => {
+      if (pos.position === 0) return false; // Skip positions with zero quantity
       const hasPositionsInCategory = watchLists.some(wl => {
         return wl.items.some((itm: any) => itm.ticker === pos.contractDesc);
       });
@@ -66,7 +73,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
       const category = payload[0].payload.category
       const isUncategorized = category === "Uncategorized"      
       const watchList = watchLists.find(wl => wl.category === category)
-      const items = isUncategorized ? getUncategorizedPositions() : watchList ? positions.filter(pos => watchList.items.some((wli: any) => pos.contractDesc === wli.ticker)) : [];
+      const items = isUncategorized ? getUncategorizedPositions() : watchList ? positions.filter(pos => pos.position > 0 && watchList.items.some((wli: any) => pos.contractDesc === wli.ticker)) : [];
       
       return (
         <div className="bg-sky-50 border rounded shadow text-sm">
@@ -126,10 +133,6 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
     category: "Uncategorized",
     expected: 0,
     actual: uncategorizedAllocationValue * 100 / netLiquidationValue
-  }]).concat([{
-    category: "Cash",
-    expected: 0,
-    actual: totalCash * 100 / netLiquidationValue
   }])
 
   return (
