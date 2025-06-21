@@ -136,7 +136,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
   }])
 
   return (
-    <div className="flex flex-1 w-full absolute h-[calc(100%-180px)] p-4">
+    <div className="flex flex-1 w-full absolute h-[calc(100%-180px)] pt-4">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data}>
           <CartesianGrid vertical={false} horizontal={false} strokeDasharray="3 3" stroke="#e0e0e0" />
@@ -147,28 +147,13 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
             interval={0}
             height={90}
             tick={{
-              fontSize: 13,
+              fontSize: 12,
               fontFamily: 'Inter, Helvetica Neue, sans-serif',
               fill: '#374151',
-              fontWeight: 500
+              fontWeight: 600
             }}
           />
-          <YAxis
-            tick={{ fontSize: 12 }}
-            label={{
-              value: 'Allocation (%)',
-              angle: -90,
-              position: 'insideLeft',
-              offset: 10,
-              style: {
-                textAnchor: 'middle',
-                fontSize: 13,
-                fill: '#374151',
-                fontFamily: 'Inter, Helvetica Neue, sans-serif',
-                fontWeight: 500
-              }
-            }}
-          />
+          <YAxis hide={true} />
           <Tooltip content={<CustomTooltip />} />
           <Legend verticalAlign="top" height={36} />
           <Bar dataKey="expected" name="Expected %" fill="#a6a6a6" radius={[4, 4, 0, 0]} label={(props) => renderBarLabel(netLiquidationValue, props)} />
