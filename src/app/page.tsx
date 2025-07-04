@@ -1,7 +1,7 @@
 "use client";
 
 import PortfolioGrid from "./components/portfolio-grid/PortfolioGrid";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
 import EnsureIbkrConnection from "./components/ensure-ibkr-connection";
 import PositionsPanel from "./PositionsPanel/PositionsPanel";
@@ -20,7 +20,7 @@ export default function Home() {
   const [accountSummary, setAccountSummary] = useState<any>({});
   const [watchLists, setWatchLists] = useState<any>([]);
 
-  const loadInitialData = async () => {
+  const loadInitialData = useCallback(async () => {
     const [fetchedPositions, fetchedAccountSummary, fetchedWatchLists] = await Promise.all([
       axios.get('/api/ibkr/positions').then(res => res.data),
       axios.get('/api/ibkr/account/summary').then(res => res.data),
@@ -29,11 +29,11 @@ export default function Home() {
     setPositions(fetchedPositions);
     setAccountSummary(fetchedAccountSummary);
     setWatchLists(fetchedWatchLists);
-  }
+  }, []);
 
-  const onIbkrConnected = async () => {
+  const onIbkrConnected = useCallback(async () => {
     loadInitialData();
-  }
+  }, [loadInitialData]);
 
   return (
     <EnsureIbkrConnection onConnect={onIbkrConnected}>

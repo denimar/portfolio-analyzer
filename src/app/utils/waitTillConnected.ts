@@ -5,11 +5,26 @@ export const waitTillConnected = (
   fallback?: () => void,
   onConnect?: () => void
 ) => {
-  return new Promise((resolve) => {
+  return new Promise(async (resolve) => {
     const startTime = Date.now();
     const timeoutMs = timeoutSeconds * 1000;
     
-    const interval = setInterval(() => {
+    // First check if already connected
+    try {
+      const initialStatus = await makeRequest('/api/ibkr/status');
+      if (initialStatus.authenticated && initialStatus.connected) {
+        console.log('Already connected, no need to wait');
+        if (onConnect) {
+          onConnect();
+        }
+        resolve(initialStatus);
+        return;
+      }
+    } catch (error) {
+      console.log('Initial status check failed, starting polling...');
+    }
+    
+    const interval = setInterval(async () => {
       // Check if timeout has been reached
       if (Date.now() - startTime >= timeoutMs) {
         clearInterval(interval);
@@ -20,21 +35,22 @@ export const waitTillConnected = (
         return;
       }
 
-      makeRequest('/api/ibkr/status').then(status => {
-        console.log('IBKR status:', status);
+      try {
+        const status = await makeRequest('/api/ibkr/status');
+        console.log('IBKR status check:', status);
         if (status.authenticated && status.connected) {
           clearInterval(interval);
           resolve(status);
           if (onConnect) {
             onConnect();
           }
+        } else {
+          console.log('Waiting for IBKR connection...');
         }
-        console.log('Waiting for IBKR connection...');
-      }).catch(err => {
+      } catch (err) {
         console.error("Error fetching IBKR status:", err);
-        clearInterval(interval);
-        resolve(null);
-      });
+        // Don't clear interval on error, keep trying until timeout
+      }
     }, 1000);
   });
 }; 
