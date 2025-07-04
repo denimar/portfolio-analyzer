@@ -129,7 +129,7 @@ const EnsureIbkrConnection: FC<EnsureIbkrConnectionProps> = ({ children, onConne
       }
       
       // Check if we have a session but need to reconnect
-      const hasSession = status.authenticated || (status.error && !status.error.includes('401'));
+      const hasSession = status['MAC'] !== undefined //status.authenticated || (status.error && !status.error.includes('401'));
       
       if (hasSession) {
         setIbkrStatus(IbkrStatusEnum.open);
