@@ -24,7 +24,8 @@ const expectedAllocation = expectedAllocationRaw?.items.map(item => ({
   allocation: item.allocation,
   items: item.tickers.map(ticker => ({
     ticker: ticker.name,
-    description: ticker.description
+    description: ticker.description,
+    isETF: ticker.isETF
   }))
 }))
 

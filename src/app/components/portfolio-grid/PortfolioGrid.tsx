@@ -31,7 +31,23 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({ expectedAllocation }) => {
             <tr key={row.id} className="border-b last:border-0 hover:bg-gray-50 text-xs">
               <td className="px-4 py-3 font-semibold">{row.category}</td>
               <td className="px-4 py-3 text-center">{row.allocation.toString()}%</td>
-              <td className="px-4 py-3">{row.items.map((itm: any) => (itm.ticker || '').replaceAll(",", ", ")).join(', ')}</td>
+              <td className="px-4 py-3">{
+                row.items.map((itm: any, index: number) => {
+                  return (
+                    <span key={itm.ticker} className='mr-2'>
+                      <a 
+                        href={`https://finance.yahoo.com/quote/${itm.ticker}`}   
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className={`${itm.isETF ? 'font-semibold bg-gray-100 px-2 py-1 rounded-md' : ''}`}
+                      >
+                        {(itm.ticker || '').replaceAll(",", ", ")}
+                      </a>
+                      {index < row.items.length - 1 && <span>, </span>}
+                    </span>
+                  )
+                })
+              }</td>
               <td className="px-4 py-3 text-gray-600">{row.notes}</td>
             </tr>
           ))}

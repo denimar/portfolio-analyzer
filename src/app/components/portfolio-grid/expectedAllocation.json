@@ -8,50 +8,50 @@
                 "category": "US Total Stock Market",
                 "allocation": 45,
                 "tickers": [
-                    { "name": "VTI", "description": "US Total Stock Market" }
+                    { "name": "VTI", "description": "US Total Stock Market", "isETF": true }
                 ]
             },
             {
                 "category": "US Small Cap",
                 "allocation": 10,
                 "tickers": [
-                    { "name": "IWM", "description": "US Small Cap" }
+                    { "name": "IWM", "description": "US Small Cap", "isETF": true }
                 ]
             },
             {
                 "category": "International Equity",
                 "allocation": 15,
                 "tickers": [
-                    { "name": "VEA", "description": "International Developed Markets" }
+                    { "name": "VEA", "description": "International Developed Markets", "isETF": true }
                 ]
             },
             {
                 "category": "Emerging Markets",
                 "allocation": 5,
                 "tickers": [
-                    { "name": "VWO", "description": "Emerging Markets" }
+                    { "name": "VWO", "description": "Emerging Markets", "isETF": true }
                 ]
             },
             {
                 "category": "US REITs",
                 "allocation": 10,
                 "tickers": [
-                    { "name": "VNQ", "description": "US Real Estate Investment Trusts" }
+                    { "name": "VNQ", "description": "US Real Estate Investment Trusts", "isETF": true }
                 ]
             },
             {
                 "category": "US Aggregate Bonds",
                 "allocation": 10,
                 "tickers": [
-                    { "name": "BND", "description": "US Aggregate Bonds" }
+                    { "name": "BND", "description": "US Aggregate Bonds", "isETF": true }
                 ]
             },
             {
                 "category": "Gold/Commodities",
                 "allocation": 5,
                 "tickers": [
-                    { "name": "GLD", "description": "Gold" },
-                    { "name": "DBC", "description": "Broad Commodities" }
+                    { "name": "GLD", "description": "Gold", "isETF": true },
+                    { "name": "DBC", "description": "Broad Commodities", "isETF": true }
                 ]
             }
         ]
@@ -65,50 +65,50 @@
                 "category": "US Value Stocks",
                 "allocation": 30,
                 "tickers": [
-                    { "name": "VTV", "description": "US Value Stocks" }
+                    { "name": "VTV", "description": "US Value Stocks", "isETF": true }
                 ]
             },
             {
                 "category": "Energy/Commodities",
                 "allocation": 15,
                 "tickers": [
-                    { "name": "XLE", "description": "US Energy Sector" },
-                    { "name": "DBC", "description": "Broad Commodities" }
+                    { "name": "XLE", "description": "US Energy Sector", "isETF": true },
+                    { "name": "DBC", "description": "Broad Commodities", "isETF": true }
                 ]
             },
             {
                 "category": "TIPS (Inflation-Protected)",
                 "allocation": 20,
                 "tickers": [
-                    { "name": "TIP", "description": "Treasury Inflation-Protected Securities" }
+                    { "name": "TIP", "description": "Treasury Inflation-Protected Securities", "isETF": true }
                 ]
             },
             {
                 "category": "Gold",
                 "allocation": 10,
                 "tickers": [
-                    { "name": "GLD", "description": "Gold" }
+                    { "name": "GLD", "description": "Gold", "isETF": true }
                 ]
             },
             {
                 "category": "International Stocks",
                 "allocation": 10,
                 "tickers": [
-                    { "name": "VEA", "description": "International Developed Markets" }
+                    { "name": "VEA", "description": "International Developed Markets", "isETF": true }
                 ]
             },
             {
                 "category": "US REITs",
                 "allocation": 10,
                 "tickers": [
-                    { "name": "VNQ", "description": "US Real Estate Investment Trusts" }
+                    { "name": "VNQ", "description": "US Real Estate Investment Trusts", "isETF": true }
                 ]
             },
             {
                 "category": "Short-Term Bonds/Cash",
                 "allocation": 5,
                 "tickers": [
-                    { "name": "SHV", "description": "Short-Term Treasuries/Cash" }
+                    { "name": "SHV", "description": "Short-Term Treasuries/Cash", "isETF": true }
                 ]
             }
         ]
@@ -122,44 +122,44 @@
                 "category": "US Large Cap Defensive",
                 "allocation": 25,
                 "tickers": [
-                    { "name": "XLP", "description": "Consumer Staples" },
-                    { "name": "XLV", "description": "Healthcare" },
-                    { "name": "XLU", "description": "Utilities" }
+                    { "name": "XLP", "description": "Consumer Staples", "isETF": true },
+                    { "name": "XLV", "description": "Healthcare", "isETF": true },
+                    { "name": "XLU", "description": "Utilities", "isETF": true }
                 ]
             },
             {
                 "category": "US Aggregate Bonds",
                 "allocation": 40,
                 "tickers": [
-                    { "name": "BND", "description": "US Aggregate Bonds" }
+                    { "name": "BND", "description": "US Aggregate Bonds", "isETF": true }
                 ]
             },
             {
                 "category": "Short-Term Bonds/Cash",
                 "allocation": 20,
                 "tickers": [
-                    { "name": "SHV", "description": "Short-Term Treasuries/Cash" }
+                    { "name": "SHV", "description": "Short-Term Treasuries/Cash", "isETF": true }
                 ]
             },
             {
                 "category": "Gold",
                 "allocation": 5,
                 "tickers": [
-                    { "name": "GLD", "description": "Gold" }
+                    { "name": "GLD", "description": "Gold", "isETF": true }
                 ]
             },
             {
                 "category": "US Total Stock Market",
                 "allocation": 5,
                 "tickers": [
-                    { "name": "VTI", "description": "US Total Stock Market" }
+                    { "name": "VTI", "description": "US Total Stock Market", "isETF": true }
                 ]
             },
             {
                 "category": "International Stocks",
                 "allocation": 5,
                 "tickers": [
-                    { "name": "VEA", "description": "International Developed Markets" }
+                    { "name": "VEA", "description": "International Developed Markets", "isETF": true }
                 ]
             }
         ]
@@ -173,36 +173,36 @@
                 "category": "Long-Term US Treasuries",
                 "allocation": 40,
                 "tickers": [
-                    { "name": "TLT", "description": "20+ Year US Treasury Bonds" }
+                    { "name": "TLT", "description": "20+ Year US Treasury Bonds", "isETF": true }
                 ]
             },
             {
                 "category": "US Aggregate Bonds",
                 "allocation": 30,
                 "tickers": [
-                    { "name": "BND", "description": "US Aggregate Bonds" }
+                    { "name": "BND", "description": "US Aggregate Bonds", "isETF": true }
                 ]
             },
             {
                 "category": "Gold",
                 "allocation": 10,
                 "tickers": [
-                    { "name": "GLD", "description": "Gold" }
+                    { "name": "GLD", "description": "Gold", "isETF": true }
                 ]
             },
             {
                 "category": "US Defensive Equities",
                 "allocation": 10,
                 "tickers": [
-                    { "name": "XLP", "description": "Consumer Staples" },
-                    { "name": "XLV", "description": "Healthcare" }
+                    { "name": "XLP", "description": "Consumer Staples", "isETF": true },
+                    { "name": "XLV", "description": "Healthcare", "isETF": true }
                 ]
             },
             {
                 "category": "Cash / Ultra Short Bonds",
                 "allocation": 10,
                 "tickers": [
-                    { "name": "SHV", "description": "Short-Term Treasuries/Cash" }
+                    { "name": "SHV", "description": "Short-Term Treasuries/Cash", "isETF": true }
                 ]
             }
         ]
@@ -216,8 +216,8 @@
                 "category": "Cash/Short-Term Treasuries",
                 "allocation": 30,
                 "tickers": [
-                    { "name": "SHV", "description": "Short-Term Treasury ETF" },
-                    { "name": "BIL", "description": "Short-Term Treasury ETF" },
+                    { "name": "SHV", "description": "Short-Term Treasury ETF", "isETF": true },
+                    { "name": "BIL", "description": "Short-Term Treasury ETF", "isETF": true },
                     { "name": "VMFXX", "description": "Vanguard Federal Money Market Fund" },
                     { "name": "T-Bills", "description": "US Treasury Bills" }
                 ]
@@ -226,16 +226,16 @@
                 "category": "US Treasuries (3-10yr)",
                 "allocation": 25,
                 "tickers": [
-                    { "name": "IEF", "description": "iShares 7-10 Year Treasury Bond ETF" },
-                    { "name": "VGIT", "description": "Vanguard Intermediate-Term Treasury ETF" },
-                    { "name": "GOVT", "description": "iShares US Treasury Bond ETF" }
+                    { "name": "IEF", "description": "iShares 7-10 Year Treasury Bond ETF", "isETF": true },
+                    { "name": "VGIT", "description": "Vanguard Intermediate-Term Treasury ETF", "isETF": true },
+                    { "name": "GOVT", "description": "iShares US Treasury Bond ETF", "isETF": true }
                 ]
             },
             {
                 "category": "Consumer Staples",
                 "allocation": 15,
                 "tickers": [
-                    { "name": "XLP", "description": "Consumer Staples ETF" },
+                    { "name": "XLP", "description": "Consumer Staples ETF", "isETF": true },
                     { "name": "KO", "description": "Coca-Cola Company" },
                     { "name": "PG", "description": "Procter & Gamble" },
                     { "name": "PEP", "description": "PepsiCo" },
@@ -252,7 +252,7 @@
                 "category": "Healthcare",
                 "allocation": 10,
                 "tickers": [
-                    { "name": "XLV", "description": "Healthcare ETF" },
+                    { "name": "XLV", "description": "Healthcare ETF", "isETF": true },
                     { "name": "JNJ", "description": "Johnson & Johnson" },
                     { "name": "UNH", "description": "UnitedHealth Group" },
                     { "name": "ABBV", "description": "AbbVie Inc." }
@@ -262,7 +262,7 @@
                 "category": "Utilities",
                 "allocation": 5,
                 "tickers": [
-                    { "name": "XLU", "description": "Utilities ETF" },
+                    { "name": "XLU", "description": "Utilities ETF", "isETF": true },
                     { "name": "NEE", "description": "NextEra Energy" },
                     { "name": "SO", "description": "Southern Company" },
                     { "name": "DUK", "description": "Duke Energy" }
@@ -272,15 +272,15 @@
                 "category": "Gold",
                 "allocation": 10,
                 "tickers": [
-                    { "name": "GLD", "description": "SPDR Gold Trust" },
-                    { "name": "IAU", "description": "iShares Gold Trust" }
+                    { "name": "GLD", "description": "SPDR Gold Trust", "isETF": true },
+                    { "name": "IAU", "description": "iShares Gold Trust", "isETF": true }
                 ]
             },
             {
                 "category": "High-Quality REITs",
                 "allocation": 5,
                 "tickers": [
-                    { "name": "XLRE", "description": "Real Estate ETF" },
+                    { "name": "XLRE", "description": "Real Estate ETF", "isETF": true },
                     { "name": "PSA", "description": "Public Storage" },
                     { "name": "EXR", "description": "Extra Space Storage" },
                     { "name": "WELL", "description": "Welltower Inc." }
