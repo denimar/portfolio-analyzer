@@ -216,10 +216,7 @@
                 "category": "Cash/Short-Term Treasuries",
                 "allocation": 30,
                 "tickers": [
-                    { "name": "SHV", "description": "Short-Term Treasury ETF", "isETF": true },
-                    { "name": "BIL", "description": "Short-Term Treasury ETF", "isETF": true },
-                    { "name": "VMFXX", "description": "Vanguard Federal Money Market Fund" },
-                    { "name": "T-Bills", "description": "US Treasury Bills" }
+                    { "name": "SHV", "description": "Short-Term Treasury ETF", "isETF": true }
                 ]
             },
             {
