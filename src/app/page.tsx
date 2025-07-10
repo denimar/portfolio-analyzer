@@ -17,11 +17,38 @@ import expectedAllocationJSON from "./components/portfolio-grid/expectedAllocati
 import { useSearchParams, useRouter } from "next/navigation";
 import { Loader } from "lucide-react";
 
+// Local storage key for portfolio selection
+const PORTFOLIO_STORAGE_KEY = 'portfolio-analyzer-selected-portfolio';
+
+// Helper function to safely get item from localStorage
+const getStoredPortfolioId = (): string => {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const stored = localStorage.getItem(PORTFOLIO_STORAGE_KEY);
+      return stored || "50"; // Default to Defensive Portfolio if nothing stored
+    }
+  } catch (error) {
+    console.warn('localStorage not available:', error);
+  }
+  return "50"; // Default fallback
+};
+
+// Helper function to safely save to localStorage
+const savePortfolioId = (portfolioId: string): void => {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem(PORTFOLIO_STORAGE_KEY, portfolioId);
+    }
+  } catch (error) {
+    console.warn('Failed to save to localStorage:', error);
+  }
+};
+
 export default function Home() {
   const [positions, setPositions] = useState<any[]>([]);
   const [accountSummary, setAccountSummary] = useState<any>({});
   const [activeTab, setActiveTab] = useState("my_allocation");
-  const [selectedPortfolioId, setSelectedPortfolioId] = useState("50"); // Default to Defensive Portfolio
+  const [selectedPortfolioId, setSelectedPortfolioId] = useState<string>(() => getStoredPortfolioId());
   const [isPending, startTransition] = useTransition()
   
   const searchParams = useSearchParams();
@@ -73,6 +100,7 @@ export default function Home() {
 
   const handlePortfolioChange = (portfolioId: string) => {
     setSelectedPortfolioId(portfolioId);
+    savePortfolioId(portfolioId);
   };
 
   const loadInitialData = useCallback(async () => {
