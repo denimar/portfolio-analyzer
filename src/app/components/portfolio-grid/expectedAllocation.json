@@ -239,7 +239,13 @@
                     { "name": "KO", "description": "Coca-Cola Company" },
                     { "name": "PG", "description": "Procter & Gamble" },
                     { "name": "PEP", "description": "PepsiCo" },
-                    { "name": "WMT", "description": "Walmart" }
+                    { "name": "WMT", "description": "Walmart" },
+                    { "name": "COST", "description": "Costco Wholesale" },
+                    { "name": "MDLZ", "description": "Mondelez International" },
+                    { "name": "CL", "description": "Colgate-Palmolive" },
+                    { "name": "KMB", "description": "Kimberly-Clark" },
+                    { "name": "MO", "description": "Altria Group" },
+                    { "name": "GIS", "description": "General Mills" }
                 ]
             },
             {
