@@ -16,23 +16,13 @@ import AllocationGraph from "./components/AllocationGraph";
 import expectedAllocationJSON from "./components/portfolio-grid/expectedAllocation.json";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Loader } from "lucide-react";
-
-const expectedAllocationRaw = expectedAllocationJSON.find(item => item.id === "50")
-
-const expectedAllocation = expectedAllocationRaw?.items.map(item => ({  
-  category: item.category,
-  allocation: item.allocation,
-  items: item.tickers.map(ticker => ({
-    ticker: ticker.name,
-    description: ticker.description,
-    isETF: ticker.isETF
-  }))
-}))
+import PortfolioSelector from "./components/PortfolioSelector";
 
 export default function Home() {
   const [positions, setPositions] = useState<any[]>([]);
   const [accountSummary, setAccountSummary] = useState<any>({});
   const [activeTab, setActiveTab] = useState("my_allocation");
+  const [selectedPortfolioId, setSelectedPortfolioId] = useState("50"); // Default to Defensive Portfolio
   const [isPending, startTransition] = useTransition()
   
   const searchParams = useSearchParams();
@@ -45,6 +35,20 @@ export default function Home() {
     "positions": "positions",
     "performance": "performance"
   };
+
+  // Get the selected portfolio data
+  const selectedPortfolio = expectedAllocationJSON.find(item => item.id === selectedPortfolioId);
+  
+  // Transform the portfolio data for components
+  const expectedAllocation = selectedPortfolio?.items.map(item => ({  
+    category: item.category,
+    allocation: item.allocation,
+    items: item.tickers.map(ticker => ({
+      ticker: ticker.name,
+      description: ticker.description,
+      isETF: ticker.isETF
+    }))
+  })) || [];
 
   // Initialize tab from URL query parameter
   useEffect(() => {
@@ -68,6 +72,10 @@ export default function Home() {
     }
   };
 
+  const handlePortfolioChange = (portfolioId: string) => {
+    setSelectedPortfolioId(portfolioId);
+  };
+
   const loadInitialData = useCallback(async () => {
     startTransition(async () => {
       const [fetchedPositions, fetchedAccountSummary] = await Promise.all([
@@ -89,6 +97,11 @@ export default function Home() {
       {
         isPending ? <div className="flex items-center justify-center h-screen"><Loader className="animate-spin h-6 w-6" /></div> : (
           <div className="p-2">
+            <PortfolioSelector 
+              portfolios={expectedAllocationJSON}
+              selectedPortfolioId={selectedPortfolioId}
+              onPortfolioChange={handlePortfolioChange}
+            />
             <Tabs value={activeTab} onValueChange={handleTabChange}>
               <TabsList>
                 <TabsTrigger value="my_allocation">Allocation</TabsTrigger>
