@@ -1,7 +1,7 @@
 "use client";
 
 import PortfolioGrid from "./components/portfolio-grid/PortfolioGrid";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useTransition } from "react";
 import axios from "axios";
 import EnsureIbkrConnection from "./components/ensure-ibkr-connection";
 import PositionsPanel from "./PositionsPanel/PositionsPanel";
@@ -13,19 +13,69 @@ import {
 } from "@/components/ui/tabs"
 import AppHeader from "./components/AppHeader";
 import AllocationGraph from "./components/AllocationGraph";
-import expectedAllocation from "./components/portfolio-grid/expectedAllocation.json";
+import expectedAllocationJSON from "./components/portfolio-grid/expectedAllocation.json";
+import { useSearchParams, useRouter } from "next/navigation";
+import { Loader } from "lucide-react";
+
+const expectedAllocationRaw = expectedAllocationJSON.find(item => item.id === "50")
+
+const expectedAllocation = expectedAllocationRaw?.items.map(item => ({  
+  category: item.category,
+  allocation: item.allocation,
+  items: item.tickers.map(ticker => ({
+    ticker: ticker.name,
+    description: ticker.description
+  }))
+}))
 
 export default function Home() {
   const [positions, setPositions] = useState<any[]>([]);
   const [accountSummary, setAccountSummary] = useState<any>({});
+  const [activeTab, setActiveTab] = useState("my_allocation");
+  const [isPending, startTransition] = useTransition()
+  
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // Map URL query values to tab values
+  const tabMapping = {
+    "allocation": "my_allocation",
+    "strategy": "allocation_strategy", 
+    "positions": "positions",
+    "performance": "performance"
+  };
+
+  // Initialize tab from URL query parameter
+  useEffect(() => {
+    const tabParam = searchParams.get("tab");
+    if (tabParam && tabMapping[tabParam as keyof typeof tabMapping]) {
+      setActiveTab(tabMapping[tabParam as keyof typeof tabMapping]);
+    }
+  }, [searchParams]);
+
+  // Update URL when tab changes
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    
+    // Find the URL key for this tab value
+    const urlKey = Object.keys(tabMapping).find(key => tabMapping[key as keyof typeof tabMapping] === value);
+    
+    if (urlKey) {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("tab", urlKey);
+      router.push(`?${params.toString()}`);
+    }
+  };
 
   const loadInitialData = useCallback(async () => {
-    const [fetchedPositions, fetchedAccountSummary] = await Promise.all([
-      axios.get('/api/ibkr/positions').then(res => res.data),
-      axios.get('/api/ibkr/account/summary').then(res => res.data),
-    ]);
-    setPositions(fetchedPositions);
-    setAccountSummary(fetchedAccountSummary);
+    startTransition(async () => {
+      const [fetchedPositions, fetchedAccountSummary] = await Promise.all([
+        axios.get('/api/ibkr/positions').then(res => res.data),
+        axios.get('/api/ibkr/account/summary').then(res => res.data),
+      ]);
+      setPositions(fetchedPositions);
+      setAccountSummary(fetchedAccountSummary);
+    });
   }, []);
 
   const onIbkrConnected = useCallback(async () => {
@@ -35,28 +85,32 @@ export default function Home() {
   return (
     <EnsureIbkrConnection onConnect={onIbkrConnected}>
       <AppHeader accountSummary={accountSummary} />
-      <div className="p-2">
-        <Tabs defaultValue="my_allocation">
-          <TabsList>
-            <TabsTrigger value="my_allocation">Allocation</TabsTrigger>
-            <TabsTrigger value="allocation_strategy">Strategy</TabsTrigger>
-            <TabsTrigger value="positions">Positions</TabsTrigger>
-            <TabsTrigger value="performance">Performance</TabsTrigger>
-          </TabsList>
-          <TabsContent value='my_allocation'>
-            <AllocationGraph totalCash={accountSummary.totalCash} positions={positions} expectedAllocation={expectedAllocation} />
-          </TabsContent>
-          <TabsContent value='allocation_strategy'>
-            <PortfolioGrid expectedAllocation={expectedAllocation} />
-          </TabsContent>
-          <TabsContent value='positions'>
-            <PositionsPanel positions={positions} />
-          </TabsContent>
-          <TabsContent value='performance'>
-            <div className="p-4">Performance (Coming soon...)</div>
-          </TabsContent>
-        </Tabs>
-      </div>
+      {
+        isPending ? <div className="flex items-center justify-center h-screen"><Loader className="animate-spin h-6 w-6" /></div> : (
+          <div className="p-2">
+            <Tabs value={activeTab} onValueChange={handleTabChange}>
+              <TabsList>
+                <TabsTrigger value="my_allocation">Allocation</TabsTrigger>
+                <TabsTrigger value="allocation_strategy">Strategy</TabsTrigger>
+                <TabsTrigger value="positions">Positions</TabsTrigger>
+                <TabsTrigger value="performance">Performance</TabsTrigger>
+              </TabsList>
+              <TabsContent value='my_allocation'>
+                <AllocationGraph totalCash={accountSummary.totalCash} positions={positions} expectedAllocation={expectedAllocation} />
+              </TabsContent>
+              <TabsContent value='allocation_strategy'>
+                <PortfolioGrid expectedAllocation={expectedAllocation} />
+              </TabsContent>
+              <TabsContent value='positions'>
+                <PositionsPanel positions={positions} />
+              </TabsContent>
+              <TabsContent value='performance'>
+                <div className="p-4">Performance (Coming soon...)</div>
+              </TabsContent>
+            </Tabs>
+          </div>
+        )
+      }
     </EnsureIbkrConnection >
   );
 }

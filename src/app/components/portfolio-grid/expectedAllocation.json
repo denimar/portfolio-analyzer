@@ -1,496 +1,285 @@
 [
-  {
-      "id": "115",
-      "category": "01. US Stocks",
-      "allocation": 30,
-      "notes": "Core market exposure",
-      "items": [
-          {
-              "ST": "STK",
-              "C": "136155102",
-              "conid": 136155102,
-              "name": "VANGUARD S&P 500 ETF",
-              "fullName": "VOO",
-              "assetClass": "STK",
-              "ticker": "VOO",
-              "chineseName": "Vanguard&#x6807;&#x666E;500 ETF"
-          },
-          {
-              "ST": "STK",
-              "C": "12340041",
-              "conid": 12340041,
-              "name": "VANGUARD TOTAL STOCK MKT ETF",
-              "fullName": "VTI",
-              "assetClass": "STK",
-              "ticker": "VTI",
-              "chineseName": "Vanguard&#x5168;&#x80A1;&#x7968;&#x5E02;&#x573A;ETF"
-          },
-          {
-              "ST": "STK",
-              "C": "8894",
-              "conid": 8894,
-              "name": "COCA-COLA CO/THE",
-              "fullName": "KO",
-              "assetClass": "STK",
-              "ticker": "KO",
-              "chineseName": "&#x53EF;&#x53E3;&#x53EF;&#x4E50;"
-          },
-          {
-              "ST": "STK",
-              "C": "49462172",
-              "conid": 49462172,
-              "name": "VISA INC-CLASS A SHARES",
-              "fullName": "V",
-              "assetClass": "STK",
-              "ticker": "V",
-              "chineseName": "&#x7EF4;&#x8428;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "72063691",
-              "conid": 72063691,
-              "name": "BERKSHIRE HATHAWAY INC-CL B",
-              "fullName": "BRK B",
-              "assetClass": "STK",
-              "ticker": "BRK B",
-              "chineseName": "&#x4F2F;&#x514B;&#x5E0C;&#x5C14;&#x54C8;&#x6492;&#x97E6;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "38685693",
-              "conid": 38685693,
-              "name": "MASTERCARD INC - A",
-              "fullName": "MA",
-              "assetClass": "STK",
-              "ticker": "MA",
-              "chineseName": "&#x4E07;&#x4E8B;&#x8FBE;&#x80A1;&#x4EFD;&#x6709;&#x9650;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "13272",
-              "conid": 13272,
-              "name": "UNITEDHEALTH GROUP INC",
-              "fullName": "UNH",
-              "assetClass": "STK",
-              "ticker": "UNH",
-              "chineseName": "&#x8054;&#x5408;&#x5065;&#x5EB7;&#x96C6;&#x56E2;"
-          }
-      ]
-  },
-  {
-      "id": "116",
-      "category": "02. Tech & Thematic",
-      "allocation": 15,
-      "notes": "Growth-focused assets",
-      "items": [
-          {
-              "ST": "STK",
-              "C": "107113386",
-              "conid": 107113386,
-              "name": "META PLATFORMS INC-CLASS A",
-              "fullName": "META",
-              "assetClass": "STK",
-              "ticker": "META",
-              "chineseName": "Meta&#x5E73;&#x53F0;&#x80A1;&#x4EFD;&#x6709;&#x9650;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "320227571",
-              "conid": 320227571,
-              "name": "INVESCO QQQ TRUST SERIES 1",
-              "fullName": "QQQ",
-              "assetClass": "STK",
-              "ticker": "QQQ",
-              "chineseName": "&#x666F;&#x987A; QQQ&#x4FE1;&#x6258;&#x7CFB;&#x5217;1"
-          },
-          {
-              "ST": "STK",
-              "C": "272093",
-              "conid": 272093,
-              "name": "MICROSOFT CORP",
-              "fullName": "MSFT",
-              "assetClass": "STK",
-              "ticker": "MSFT",
-              "chineseName": "&#x5FAE;&#x8F6F;"
-          },
-          {
-              "ST": "STK",
-              "C": "208813720",
-              "conid": 208813720,
-              "name": "ALPHABET INC-CL C",
-              "fullName": "GOOG",
-              "assetClass": "STK",
-              "ticker": "GOOG",
-              "chineseName": "Alphabet&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "15124833",
-              "conid": 15124833,
-              "name": "NETFLIX INC",
-              "fullName": "NFLX",
-              "assetClass": "STK",
-              "ticker": "NFLX",
-              "chineseName": "&#x5948;&#x98DE;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "265598",
-              "conid": 265598,
-              "name": "APPLE INC",
-              "fullName": "AAPL",
-              "assetClass": "STK",
-              "ticker": "AAPL",
-              "chineseName": "&#x82F9;&#x679C;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "76792991",
-              "conid": 76792991,
-              "name": "TESLA INC",
-              "fullName": "TSLA",
-              "assetClass": "STK",
-              "ticker": "TSLA",
-              "chineseName": "&#x7279;&#x65AF;&#x62C9;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "4391",
-              "conid": 4391,
-              "name": "ADVANCED MICRO DEVICES",
-              "fullName": "AMD",
-              "assetClass": "STK",
-              "ticker": "AMD",
-              "chineseName": "AMD&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "3691937",
-              "conid": 3691937,
-              "name": "AMAZON.COM INC",
-              "fullName": "AMZN",
-              "assetClass": "STK",
-              "ticker": "AMZN",
-              "chineseName": "&#x4E9A;&#x9A6C;&#x900A;&#x516C;&#x53F8;"
-          }
-      ]
-  },
-  {
-      "id": "117",
-      "category": "03. International ETFs",
-      "allocation": 10,
-      "notes": "Global diversification",
-      "items": [
-          {
-              "ST": "STK",
-              "C": "45444192",
-              "conid": 45444192,
-              "name": "VANGUARD FTSE DEVELOPED ETF",
-              "fullName": "VEA",
-              "assetClass": "STK",
-              "ticker": "VEA",
-              "chineseName": "&#x5148;&#x950B;&#x5BCC;&#x65F6;&#x53D1;&#x8FBE;&#x5E02;&#x573A;ETF"
-          }
-      ]
-  },
-  {
-      "id": "118",
-      "category": "04. REITs",
-      "allocation": 10,
-      "notes": "Income + real estate",
-      "items": [
-          {
-              "ST": "STK",
-              "C": "6607487",
-              "conid": 6607487,
-              "name": "ALEXANDRIA REAL ESTATE EQUIT",
-              "fullName": "ARE",
-              "assetClass": "STK",
-              "ticker": "ARE",
-              "chineseName": "&#x4E9A;&#x5386;&#x5C71;&#x5927;&#x623F;&#x5730;&#x4EA7;&#x80A1;&#x4EFD;&#x6709;&#x9650;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "292080616",
-              "conid": 292080616,
-              "name": "VICI PROPERTIES INC",
-              "fullName": "VICI",
-              "assetClass": "STK",
-              "ticker": "VICI",
-              "chineseName": "VICI Properties&#x80A1;&#x4EFD;&#x6709;&#x9650;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "10672",
-              "conid": 10672,
-              "name": "REALTY INCOME CORP",
-              "fullName": "O",
-              "assetClass": "STK",
-              "ticker": "O",
-              "chineseName": "Realty Income&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "88819288",
-              "conid": 88819288,
-              "name": "PROLOGIS INC",
-              "fullName": "PLD",
-              "assetClass": "STK",
-              "ticker": "PLD",
-              "chineseName": "&#x5B89;&#x535A;"
-          },
-          {
-              "ST": "STK",
-              "C": "99831145",
-              "conid": 99831145,
-              "name": "AMERICAN TOWER CORP",
-              "fullName": "AMT",
-              "assetClass": "STK",
-              "ticker": "AMT",
-              "chineseName": "&#x7F8E;&#x56FD;&#x53D1;&#x5C04;&#x5854;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "31230302",
-              "conid": 31230302,
-              "name": "VANGUARD REAL ESTATE ETF",
-              "fullName": "VNQ",
-              "assetClass": "STK",
-              "ticker": "VNQ",
-              "chineseName": "Vanguard&#x623F;&#x5730;&#x4EA7;ETF"
-          },
-          {
-              "ST": "STK",
-              "C": "4151",
-              "conid": 4151,
-              "name": "AGREE REALTY CORP",
-              "fullName": "ADC",
-              "assetClass": "STK",
-              "ticker": "ADC",
-              "chineseName": "&#x827E;&#x683C;&#x91CC;&#x4E0D;&#x52A8;&#x4EA7;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "322317091",
-              "conid": 322317091,
-              "name": "ESSENTIAL PROPERTIES REALTY",
-              "fullName": "EPRT",
-              "assetClass": "STK",
-              "ticker": "EPRT",
-              "chineseName": "Essential Properties&#x623F;&#x5730;&#x4EA7;&#x4FE1;"
-          },
-          {
-              "ST": "STK",
-              "C": "131219465",
-              "conid": 131219465,
-              "name": "REXFORD INDUSTRIAL REALTY IN",
-              "fullName": "REXR",
-              "assetClass": "STK",
-              "ticker": "REXR",
-              "chineseName": "Rexford Industrial Realty&#x80A1;"
-          },
-          {
-              "ST": "STK",
-              "C": "30351205",
-              "conid": 30351205,
-              "name": "EXTRA SPACE STORAGE INC",
-              "fullName": "EXR",
-              "assetClass": "STK",
-              "ticker": "EXR",
-              "chineseName": "Extra Space Storage&#x6709;&#x9650;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "94153980",
-              "conid": 94153980,
-              "name": "CUBESMART",
-              "fullName": "CUBE",
-              "assetClass": "STK",
-              "ticker": "CUBE",
-              "chineseName": "&#x7F8E;&#x5143;"
-          },
-          {
-              "ST": "STK",
-              "C": "12002",
-              "conid": 12002,
-              "name": "PUBLIC STORAGE",
-              "fullName": "PSA",
-              "assetClass": "STK",
-              "ticker": "PSA",
-              "chineseName": "&#x516C;&#x5171;&#x5B58;&#x50A8;"
-          }
-      ]
-  },
-  {
-      "id": "119",
-      "category": "05. Dividends & Defensives",
-      "allocation": 10,
-      "notes": "Stability + dividend income",
-      "items": [
-          {
-              "ST": "STK",
-              "C": "8719",
-              "conid": 8719,
-              "name": "JOHNSON & JOHNSON",
-              "fullName": "JNJ",
-              "assetClass": "STK",
-              "ticker": "JNJ",
-              "chineseName": "&#x5F3A;&#x751F;"
-          },
-          {
-              "ST": "STK",
-              "C": "96079912",
-              "conid": 96079912,
-              "name": "SCHWAB US DVD EQUITY ETF",
-              "fullName": "SCHD",
-              "assetClass": "STK",
-              "ticker": "SCHD",
-              "chineseName": "&#x5609;&#x4FE1;&#x7406;&#x8D22;&#x7F8E;&#x56FD;&#x80A1;&#x5229;&#x80A1;&#x7968;ETF"
-          },
-          {
-              "ST": "STK",
-              "C": "11054",
-              "conid": 11054,
-              "name": "PROCTER & GAMBLE CO/THE",
-              "fullName": "PG",
-              "assetClass": "STK",
-              "ticker": "PG",
-              "chineseName": "&#x5B9D;&#x6D01;"
-          },
-          {
-              "ST": "STK",
-              "C": "9408",
-              "conid": 9408,
-              "name": "MC DONALD'S-CORP",
-              "fullName": "MCD",
-              "assetClass": "STK",
-              "ticker": "MCD",
-              "chineseName": "&#x9EA6;&#x5F53;&#x52B3;"
-          },
-          {
-              "ST": "STK",
-              "C": "118089500",
-              "conid": 118089500,
-              "name": "ABBVIE INC",
-              "fullName": "ABBV",
-              "assetClass": "STK",
-              "ticker": "ABBV",
-              "chineseName": "&#x827E;&#x4F2F;&#x7EF4;&#x80A1;&#x4EFD;&#x6709;&#x9650;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "75960201",
-              "conid": 75960201,
-              "name": "NEXTERA ENERGY INC",
-              "fullName": "NEE",
-              "assetClass": "STK",
-              "ticker": "NEE",
-              "chineseName": "&#x65B0;&#x7EAA;&#x5143;&#x80FD;&#x6E90;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "7930",
-              "conid": 7930,
-              "name": "HOME DEPOT INC",
-              "fullName": "HD",
-              "assetClass": "STK",
-              "ticker": "HD",
-              "chineseName": "&#x5BB6;&#x5F97;&#x5B9D;"
-          },
-          {
-              "ST": "STK",
-              "C": "12300",
-              "conid": 12300,
-              "name": "SOUTHERN CO/THE",
-              "fullName": "SO",
-              "assetClass": "STK",
-              "ticker": "SO",
-              "chineseName": "&#x5357;&#x65B9;&#x516C;&#x53F8;"
-          },
-          {
-              "ST": "STK",
-              "C": "110176011",
-              "conid": 110176011,
-              "name": "DUKE ENERGY CORP",
-              "fullName": "DUK",
-              "assetClass": "STK",
-              "ticker": "DUK",
-              "chineseName": "&#x675C;&#x514B;&#x80FD;&#x6E90;"
-          },
-          {
-              "ST": "STK",
-              "C": "5684",
-              "conid": 5684,
-              "name": "CHEVRON CORP",
-              "fullName": "CVX",
-              "assetClass": "STK",
-              "ticker": "CVX",
-              "chineseName": "&#x96EA;&#x4F5B;&#x9F99;"
-          },
-          {
-              "ST": "STK",
-              "C": "11017",
-              "conid": 11017,
-              "name": "PEPSICO INC",
-              "fullName": "PEP",
-              "assetClass": "STK",
-              "ticker": "PEP",
-              "chineseName": "&#x767E;&#x4E8B;&#x53EF;&#x4E50;"
-          }
-      ]
-  },
-  {
-      "id": "120",
-      "category": "06. Short-Term Bonds / Cash",
-      "allocation": 10,
-      "notes": "Capital preservation",
-      "items": [
-          {
-              "ST": "STK",
-              "C": "42454579",
-              "conid": 42454579,
-              "name": "ISHARES SHORT TREASURY BOND",
-              "fullName": "SHV",
-              "assetClass": "STK",
-              "ticker": "SHV",
-              "chineseName": "iShares&#x5B89;&#x7855;&#x77ED;&#x671F;&#x56FD;&#x503A;ETF"
-          }
-      ]
-  },
-  {
-      "id": "121",
-      "category": "07. Gold ETF",
-      "allocation": 10,
-      "notes": "Inflation hedge",
-      "items": [
-          {
-              "ST": "STK",
-              "C": "51529211",
-              "conid": 51529211,
-              "name": "SPDR GOLD SHARES",
-              "fullName": "GLD",
-              "assetClass": "STK",
-              "ticker": "GLD",
-              "chineseName": "SPDR&#x9EC4;&#x91D1;&#x4FE1;&#x6258;"
-          }
-      ]
-  },
-  {
-      "id": "122",
-      "category": "08. Bitcoin ETF",
-      "allocation": 5,
-      "notes": "Asymmetric growth play",
-      "items": [
-          {
-              "ST": "STK",
-              "C": "677037673",
-              "conid": 677037673,
-              "name": "ISHARES BITCOIN TRUST ETF",
-              "fullName": "IBIT",
-              "assetClass": "STK",
-              "ticker": "IBIT",
-              "chineseName": "&#x7F8E;&#x5143;"
-          }
-      ]
-  }
+    {
+        "id": "10",
+        "name": "Expansion Portfolio",
+        "notes": "Aims to maximize growth during periods of strong economic expansion and risk-on market sentiment. Heavily weighted towards stocks (especially US total market and small caps), with some international, emerging markets, REITs, and a small allocation to bonds and commodities for diversification.",
+        "items": [
+            {
+                "category": "US Total Stock Market",
+                "allocation": 45,
+                "tickers": [
+                    { "name": "VTI", "description": "US Total Stock Market" }
+                ]
+            },
+            {
+                "category": "US Small Cap",
+                "allocation": 10,
+                "tickers": [
+                    { "name": "IWM", "description": "US Small Cap" }
+                ]
+            },
+            {
+                "category": "International Equity",
+                "allocation": 15,
+                "tickers": [
+                    { "name": "VEA", "description": "International Developed Markets" }
+                ]
+            },
+            {
+                "category": "Emerging Markets",
+                "allocation": 5,
+                "tickers": [
+                    { "name": "VWO", "description": "Emerging Markets" }
+                ]
+            },
+            {
+                "category": "US REITs",
+                "allocation": 10,
+                "tickers": [
+                    { "name": "VNQ", "description": "US Real Estate Investment Trusts" }
+                ]
+            },
+            {
+                "category": "US Aggregate Bonds",
+                "allocation": 10,
+                "tickers": [
+                    { "name": "BND", "description": "US Aggregate Bonds" }
+                ]
+            },
+            {
+                "category": "Gold/Commodities",
+                "allocation": 5,
+                "tickers": [
+                    { "name": "GLD", "description": "Gold" },
+                    { "name": "DBC", "description": "Broad Commodities" }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "20",
+        "name": "Inflation Portfolio",
+        "notes": "Designed to protect purchasing power during inflationary periods. Focuses on value stocks, commodities, energy, TIPS (inflation-protected bonds), and real assets like REITs and gold, while maintaining diversification across regions and asset classes.",
+        "items": [
+            {
+                "category": "US Value Stocks",
+                "allocation": 30,
+                "tickers": [
+                    { "name": "VTV", "description": "US Value Stocks" }
+                ]
+            },
+            {
+                "category": "Energy/Commodities",
+                "allocation": 15,
+                "tickers": [
+                    { "name": "XLE", "description": "US Energy Sector" },
+                    { "name": "DBC", "description": "Broad Commodities" }
+                ]
+            },
+            {
+                "category": "TIPS (Inflation-Protected)",
+                "allocation": 20,
+                "tickers": [
+                    { "name": "TIP", "description": "Treasury Inflation-Protected Securities" }
+                ]
+            },
+            {
+                "category": "Gold",
+                "allocation": 10,
+                "tickers": [
+                    { "name": "GLD", "description": "Gold" }
+                ]
+            },
+            {
+                "category": "International Stocks",
+                "allocation": 10,
+                "tickers": [
+                    { "name": "VEA", "description": "International Developed Markets" }
+                ]
+            },
+            {
+                "category": "US REITs",
+                "allocation": 10,
+                "tickers": [
+                    { "name": "VNQ", "description": "US Real Estate Investment Trusts" }
+                ]
+            },
+            {
+                "category": "Short-Term Bonds/Cash",
+                "allocation": 5,
+                "tickers": [
+                    { "name": "SHV", "description": "Short-Term Treasuries/Cash" }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "30",
+        "name": "Recession Portfolio",
+        "notes": "Built to be resilient during recessions, this portfolio emphasizes defensive sectors (staples, healthcare, utilities), a large allocation to bonds and cash for safety, and only modest stock exposure. Gold is included as a potential hedge.",
+        "items": [
+            {
+                "category": "US Large Cap Defensive",
+                "allocation": 25,
+                "tickers": [
+                    { "name": "XLP", "description": "Consumer Staples" },
+                    { "name": "XLV", "description": "Healthcare" },
+                    { "name": "XLU", "description": "Utilities" }
+                ]
+            },
+            {
+                "category": "US Aggregate Bonds",
+                "allocation": 40,
+                "tickers": [
+                    { "name": "BND", "description": "US Aggregate Bonds" }
+                ]
+            },
+            {
+                "category": "Short-Term Bonds/Cash",
+                "allocation": 20,
+                "tickers": [
+                    { "name": "SHV", "description": "Short-Term Treasuries/Cash" }
+                ]
+            },
+            {
+                "category": "Gold",
+                "allocation": 5,
+                "tickers": [
+                    { "name": "GLD", "description": "Gold" }
+                ]
+            },
+            {
+                "category": "US Total Stock Market",
+                "allocation": 5,
+                "tickers": [
+                    { "name": "VTI", "description": "US Total Stock Market" }
+                ]
+            },
+            {
+                "category": "International Stocks",
+                "allocation": 5,
+                "tickers": [
+                    { "name": "VEA", "description": "International Developed Markets" }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "40",
+        "name": "Deflation Portfolio",
+        "notes": "Geared for periods of falling prices or deflation. Focuses on long-term US Treasuries and bonds, which tend to perform well when rates fall, with a modest allocation to defensive equities, gold, and cash.",
+        "items": [
+            {
+                "category": "Long-Term US Treasuries",
+                "allocation": 40,
+                "tickers": [
+                    { "name": "TLT", "description": "20+ Year US Treasury Bonds" }
+                ]
+            },
+            {
+                "category": "US Aggregate Bonds",
+                "allocation": 30,
+                "tickers": [
+                    { "name": "BND", "description": "US Aggregate Bonds" }
+                ]
+            },
+            {
+                "category": "Gold",
+                "allocation": 10,
+                "tickers": [
+                    { "name": "GLD", "description": "Gold" }
+                ]
+            },
+            {
+                "category": "US Defensive Equities",
+                "allocation": 10,
+                "tickers": [
+                    { "name": "XLP", "description": "Consumer Staples" },
+                    { "name": "XLV", "description": "Healthcare" }
+                ]
+            },
+            {
+                "category": "Cash / Ultra Short Bonds",
+                "allocation": 10,
+                "tickers": [
+                    { "name": "SHV", "description": "Short-Term Treasuries/Cash" }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "50",
+        "name": "Defensive Portfolio",
+        "notes": "Prioritizes capital preservation and low volatility. Heavy allocation to cash, short-term and intermediate Treasuries, plus exposure to defensive sectors (staples, healthcare, utilities), gold, and high-quality REITs for income and diversification.",
+        "items": [
+            {
+                "category": "Cash/Short-Term Treasuries",
+                "allocation": 30,
+                "tickers": [
+                    { "name": "SHV", "description": "Short-Term Treasury ETF" },
+                    { "name": "BIL", "description": "Short-Term Treasury ETF" },
+                    { "name": "VMFXX", "description": "Vanguard Federal Money Market Fund" },
+                    { "name": "T-Bills", "description": "US Treasury Bills" }
+                ]
+            },
+            {
+                "category": "US Treasuries (3-10yr)",
+                "allocation": 25,
+                "tickers": [
+                    { "name": "IEF", "description": "iShares 7-10 Year Treasury Bond ETF" },
+                    { "name": "VGIT", "description": "Vanguard Intermediate-Term Treasury ETF" },
+                    { "name": "GOVT", "description": "iShares US Treasury Bond ETF" }
+                ]
+            },
+            {
+                "category": "Consumer Staples",
+                "allocation": 15,
+                "tickers": [
+                    { "name": "XLP", "description": "Consumer Staples ETF" },
+                    { "name": "KO", "description": "Coca-Cola Company" },
+                    { "name": "PG", "description": "Procter & Gamble" },
+                    { "name": "PEP", "description": "PepsiCo" },
+                    { "name": "WMT", "description": "Walmart" }
+                ]
+            },
+            {
+                "category": "Healthcare",
+                "allocation": 10,
+                "tickers": [
+                    { "name": "XLV", "description": "Healthcare ETF" },
+                    { "name": "JNJ", "description": "Johnson & Johnson" },
+                    { "name": "UNH", "description": "UnitedHealth Group" },
+                    { "name": "ABBV", "description": "AbbVie Inc." }
+                ]
+            },
+            {
+                "category": "Utilities",
+                "allocation": 5,
+                "tickers": [
+                    { "name": "XLU", "description": "Utilities ETF" },
+                    { "name": "NEE", "description": "NextEra Energy" },
+                    { "name": "SO", "description": "Southern Company" },
+                    { "name": "DUK", "description": "Duke Energy" }
+                ]
+            },
+            {
+                "category": "Gold",
+                "allocation": 10,
+                "tickers": [
+                    { "name": "GLD", "description": "SPDR Gold Trust" },
+                    { "name": "IAU", "description": "iShares Gold Trust" }
+                ]
+            },
+            {
+                "category": "High-Quality REITs",
+                "allocation": 5,
+                "tickers": [
+                    { "name": "XLRE", "description": "Real Estate ETF" },
+                    { "name": "PSA", "description": "Public Storage" },
+                    { "name": "EXR", "description": "Extra Space Storage" },
+                    { "name": "WELL", "description": "Welltower Inc." }
+                ]
+            }
+        ]
+    }
 ]
