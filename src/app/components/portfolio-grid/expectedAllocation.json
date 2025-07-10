@@ -277,7 +277,11 @@
                     { "name": "XLRE", "description": "Real Estate ETF", "isETF": true },
                     { "name": "PSA", "description": "Public Storage" },
                     { "name": "EXR", "description": "Extra Space Storage" },
-                    { "name": "WELL", "description": "Welltower Inc." }
+                    { "name": "WELL", "description": "Welltower Inc." },
+                    { "name": "PLD", "description": "Prologis" },
+                    { "name": "AMT", "description": "American Tower" },
+                    { "name": "EQIX", "description": "Equinix" },
+                    { "name": "SPG", "description": "Simon Property Group" }
                 ]
             }
         ]
