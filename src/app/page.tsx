@@ -70,7 +70,6 @@ function HomeContent() {
   const expectedAllocation = selectedPortfolio?.items.map(item => ({  
     category: item.category,
     allocation: item.allocation,
-    notes: item.notes,
     items: item.tickers.map(ticker => ({
       ticker: ticker.name,
       description: ticker.description,
@@ -148,7 +147,7 @@ function HomeContent() {
                 <PositionsPanel positions={positions} />
               </TabsContent>
               <TabsContent value='performance'>
-                <div className="p-4">Performance (Coming soon...)</div>
+                <div className="p-4">Performance (Coming soon..)</div>
               </TabsContent>
             </Tabs>
           </div>
