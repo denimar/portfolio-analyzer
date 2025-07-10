@@ -70,6 +70,7 @@ function HomeContent() {
   const expectedAllocation = selectedPortfolio?.items.map(item => ({  
     category: item.category,
     allocation: item.allocation,
+    notes: item.notes,
     items: item.tickers.map(ticker => ({
       ticker: ticker.name,
       description: ticker.description,
