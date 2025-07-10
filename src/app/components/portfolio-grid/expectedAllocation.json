@@ -7,6 +7,7 @@
             {
                 "category": "US Total Stock Market",
                 "allocation": 45,
+                "notes": "Growth core; captures broad US market gains during economic expansion.",
                 "tickers": [
                     { "name": "VTI", "description": "US Total Stock Market", "isETF": true }
                 ]
@@ -14,6 +15,7 @@
             {
                 "category": "US Small Cap",
                 "allocation": 10,
+                "notes": "Boosts upside; small caps typically outperform in strong expansions.",
                 "tickers": [
                     { "name": "IWM", "description": "US Small Cap", "isETF": true }
                 ]
@@ -21,6 +23,7 @@
             {
                 "category": "International Equity",
                 "allocation": 15,
+                "notes": "Diversifies globally; benefits from synchronized global growth.",
                 "tickers": [
                     { "name": "VEA", "description": "International Developed Markets", "isETF": true }
                 ]
@@ -28,6 +31,7 @@
             {
                 "category": "Emerging Markets",
                 "allocation": 5,
+                "notes": "Adds growth potential from high-growth economies; higher risk/reward.",
                 "tickers": [
                     { "name": "VWO", "description": "Emerging Markets", "isETF": true }
                 ]
@@ -35,6 +39,7 @@
             {
                 "category": "US REITs",
                 "allocation": 10,
+                "notes": "Real estate exposure; REITs benefit from growth and rising rents.",
                 "tickers": [
                     { "name": "VNQ", "description": "US Real Estate Investment Trusts", "isETF": true }
                 ]
@@ -42,6 +47,7 @@
             {
                 "category": "US Aggregate Bonds",
                 "allocation": 10,
+                "notes": "Stability anchor; reduces portfolio volatility, buffers equity risk.",
                 "tickers": [
                     { "name": "BND", "description": "US Aggregate Bonds", "isETF": true }
                 ]
@@ -49,6 +55,7 @@
             {
                 "category": "Gold/Commodities",
                 "allocation": 5,
+                "notes": "Inflation and crisis hedge; adds non-correlated returns.",
                 "tickers": [
                     { "name": "GLD", "description": "Gold", "isETF": true },
                     { "name": "DBC", "description": "Broad Commodities", "isETF": true }
@@ -64,6 +71,7 @@
             {
                 "category": "US Value Stocks",
                 "allocation": 30,
+                "notes": "Value stocks tend to outperform growth during inflation; focus on profitable, established companies.",
                 "tickers": [
                     { "name": "VTV", "description": "US Value Stocks", "isETF": true }
                 ]
@@ -71,6 +79,7 @@
             {
                 "category": "Energy/Commodities",
                 "allocation": 15,
+                "notes": "Energy and commodity sectors benefit from rising prices and inflation shocks.",
                 "tickers": [
                     { "name": "XLE", "description": "US Energy Sector", "isETF": true },
                     { "name": "DBC", "description": "Broad Commodities", "isETF": true }
@@ -79,6 +88,7 @@
             {
                 "category": "TIPS (Inflation-Protected)",
                 "allocation": 20,
+                "notes": "Treasury Inflation-Protected Securities provide direct inflation hedge.",
                 "tickers": [
                     { "name": "TIP", "description": "Treasury Inflation-Protected Securities", "isETF": true }
                 ]
@@ -86,6 +96,7 @@
             {
                 "category": "Gold",
                 "allocation": 10,
+                "notes": "Gold offers a traditional inflation and crisis hedge.",
                 "tickers": [
                     { "name": "GLD", "description": "Gold", "isETF": true }
                 ]
@@ -93,6 +104,7 @@
             {
                 "category": "International Stocks",
                 "allocation": 10,
+                "notes": "Global diversification; some markets may benefit from commodity exposure.",
                 "tickers": [
                     { "name": "VEA", "description": "International Developed Markets", "isETF": true }
                 ]
@@ -100,6 +112,7 @@
             {
                 "category": "US REITs",
                 "allocation": 10,
+                "notes": "Real estate can pass inflation through rising rents.",
                 "tickers": [
                     { "name": "VNQ", "description": "US Real Estate Investment Trusts", "isETF": true }
                 ]
@@ -107,6 +120,7 @@
             {
                 "category": "Short-Term Bonds/Cash",
                 "allocation": 5,
+                "notes": "Short-term bonds preserve capital and can be reinvested as rates rise.",
                 "tickers": [
                     { "name": "SHV", "description": "Short-Term Treasuries/Cash", "isETF": true }
                 ]
@@ -121,6 +135,7 @@
             {
                 "category": "US Large Cap Defensive",
                 "allocation": 25,
+                "notes": "Focuses on resilient sectors—staples, healthcare, and utilities—which are less sensitive to economic cycles.",
                 "tickers": [
                     { "name": "XLP", "description": "Consumer Staples", "isETF": true },
                     { "name": "XLV", "description": "Healthcare", "isETF": true },
@@ -130,6 +145,7 @@
             {
                 "category": "US Aggregate Bonds",
                 "allocation": 40,
+                "notes": "Core bonds provide stability and capital preservation during downturns.",
                 "tickers": [
                     { "name": "BND", "description": "US Aggregate Bonds", "isETF": true }
                 ]
@@ -137,6 +153,7 @@
             {
                 "category": "Short-Term Bonds/Cash",
                 "allocation": 20,
+                "notes": "Short-term bonds and cash increase safety and liquidity.",
                 "tickers": [
                     { "name": "SHV", "description": "Short-Term Treasuries/Cash", "isETF": true }
                 ]
@@ -144,6 +161,7 @@
             {
                 "category": "Gold",
                 "allocation": 5,
+                "notes": "Gold acts as a hedge against severe risk-off events.",
                 "tickers": [
                     { "name": "GLD", "description": "Gold", "isETF": true }
                 ]
@@ -151,6 +169,7 @@
             {
                 "category": "US Total Stock Market",
                 "allocation": 5,
+                "notes": "Small equity allocation allows participation in recovery while limiting risk.",
                 "tickers": [
                     { "name": "VTI", "description": "US Total Stock Market", "isETF": true }
                 ]
@@ -158,6 +177,7 @@
             {
                 "category": "International Stocks",
                 "allocation": 5,
+                "notes": "Maintains global diversification, even in risk-off environments.",
                 "tickers": [
                     { "name": "VEA", "description": "International Developed Markets", "isETF": true }
                 ]
@@ -172,6 +192,7 @@
             {
                 "category": "Long-Term US Treasuries",
                 "allocation": 40,
+                "notes": "Long-term Treasuries provide maximum appreciation as yields fall in deflation.",
                 "tickers": [
                     { "name": "TLT", "description": "20+ Year US Treasury Bonds", "isETF": true }
                 ]
@@ -179,6 +200,7 @@
             {
                 "category": "US Aggregate Bonds",
                 "allocation": 30,
+                "notes": "Bonds maintain income and preserve capital in a falling price environment.",
                 "tickers": [
                     { "name": "BND", "description": "US Aggregate Bonds", "isETF": true }
                 ]
@@ -186,6 +208,7 @@
             {
                 "category": "Gold",
                 "allocation": 10,
+                "notes": "Gold offers diversification and protection against policy shocks.",
                 "tickers": [
                     { "name": "GLD", "description": "Gold", "isETF": true }
                 ]
@@ -193,6 +216,7 @@
             {
                 "category": "US Defensive Equities",
                 "allocation": 10,
+                "notes": "Staples and healthcare stocks for stability when growth is scarce.",
                 "tickers": [
                     { "name": "XLP", "description": "Consumer Staples", "isETF": true },
                     { "name": "XLV", "description": "Healthcare", "isETF": true }
@@ -201,6 +225,7 @@
             {
                 "category": "Cash / Ultra Short Bonds",
                 "allocation": 10,
+                "notes": "Cash and ultra-short bonds offer flexibility and capital preservation.",
                 "tickers": [
                     { "name": "SHV", "description": "Short-Term Treasuries/Cash", "isETF": true }
                 ]
@@ -215,6 +240,7 @@
             {
                 "category": "Cash/Short-Term Treasuries",
                 "allocation": 30,
+                "notes": "Maximizes liquidity and safety; ready for market opportunities.",
                 "tickers": [
                     { "name": "SHV", "description": "Short-Term Treasury ETF", "isETF": true }
                 ]
@@ -222,6 +248,7 @@
             {
                 "category": "US Treasuries (3-10yr)",
                 "allocation": 25,
+                "notes": "Intermediate Treasuries offer a balance of income and stability.",
                 "tickers": [
                     { "name": "VGIT", "description": "Vanguard Intermediate-Term Treasury ETF", "isETF": true }
                 ]
@@ -229,6 +256,7 @@
             {
                 "category": "Consumer Staples",
                 "allocation": 15,
+                "notes": "Staples provide steady dividends and resilient earnings in downturns.",
                 "tickers": [
                     { "name": "XLP", "description": "Consumer Staples ETF", "isETF": true },
                     { "name": "KO", "description": "Coca-Cola Company" },
@@ -246,6 +274,7 @@
             {
                 "category": "Healthcare",
                 "allocation": 10,
+                "notes": "Healthcare stocks remain defensive and provide stable cash flow.",
                 "tickers": [
                     { "name": "XLV", "description": "Healthcare ETF", "isETF": true },
                     { "name": "JNJ", "description": "Johnson & Johnson" },
@@ -256,6 +285,7 @@
             {
                 "category": "Utilities",
                 "allocation": 5,
+                "notes": "Utilities deliver reliable dividends and are less sensitive to recessions.",
                 "tickers": [
                     { "name": "XLU", "description": "Utilities ETF", "isETF": true },
                     { "name": "NEE", "description": "NextEra Energy" },
@@ -266,6 +296,7 @@
             {
                 "category": "Gold",
                 "allocation": 10,
+                "notes": "Gold adds a hedge against economic shocks and inflation surprises.",
                 "tickers": [
                     { "name": "GLD", "description": "SPDR Gold Trust", "isETF": true }
                 ]
@@ -273,6 +304,7 @@
             {
                 "category": "High-Quality REITs",
                 "allocation": 5,
+                "notes": "Best-in-class REITs provide income and diversification, even in challenging times.",
                 "tickers": [
                     { "name": "XLRE", "description": "Real Estate ETF", "isETF": true },
                     { "name": "PSA", "description": "Public Storage" },
