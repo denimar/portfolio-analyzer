@@ -223,7 +223,7 @@
                 "category": "US Treasuries (3-10yr)",
                 "allocation": 25,
                 "tickers": [
-                    { "name": "VGIT", "description": "Vanguard Intermediate-Term Treasury ETF", "isETF": true },
+                    { "name": "VGIT", "description": "Vanguard Intermediate-Term Treasury ETF", "isETF": true }
                 ]
             },
             {
