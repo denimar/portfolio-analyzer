@@ -250,7 +250,8 @@
                 "allocation": 25,
                 "notes": "Intermediate Treasuries offer a balance of income and stability.",
                 "tickers": [
-                    { "name": "VGIT", "description": "Vanguard Intermediate-Term Treasury ETF", "isETF": true }
+                    { "name": "VGIT", "description": "Vanguard Intermediate-Term Treasury ETF", "isETF": true },
+                    { "name": "IEF", "description": "iShares 7-10 Year Treasury Bond ETF", "isETF": true }
                 ]
             },
             {
