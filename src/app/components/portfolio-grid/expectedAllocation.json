@@ -223,9 +223,7 @@
                 "category": "US Treasuries (3-10yr)",
                 "allocation": 25,
                 "tickers": [
-                    { "name": "IEF", "description": "iShares 7-10 Year Treasury Bond ETF", "isETF": true },
                     { "name": "VGIT", "description": "Vanguard Intermediate-Term Treasury ETF", "isETF": true },
-                    { "name": "GOVT", "description": "iShares US Treasury Bond ETF", "isETF": true }
                 ]
             },
             {
@@ -269,8 +267,7 @@
                 "category": "Gold",
                 "allocation": 10,
                 "tickers": [
-                    { "name": "GLD", "description": "SPDR Gold Trust", "isETF": true },
-                    { "name": "IAU", "description": "iShares Gold Trust", "isETF": true }
+                    { "name": "GLD", "description": "SPDR Gold Trust", "isETF": true }
                 ]
             },
             {
