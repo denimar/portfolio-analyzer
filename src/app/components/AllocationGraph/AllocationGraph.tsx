@@ -41,12 +41,12 @@ const renderBarLabel = (netLiquidationValue: number, props: any) => {
 type AllocationGraphProps = {
   totalCash: number;
   positions: any[]
-  watchLists: any[]
+  expectedAllocation: any[]
 }
 
-const getActualAllocation = (netLiquidationValue: number, positions: any[], watchList: any): number => {
+const getActualAllocation = (netLiquidationValue: number, positions: any[], expectedAllocation: any): number => {
   const totalInCategory = positions.reduce((acc, pos) => {
-    const itemsInCategory = watchList.items.filter((itm: any) => itm.ticker === pos.contractDesc);
+    const itemsInCategory = expectedAllocation.items.filter((itm: any) => itm.ticker === pos.contractDesc);
     const totalPosValue = itemsInCategory.reduce((itemAcc: number) => itemAcc + (pos.mktPrice * (pos.position || 0)), 0);
     acc += totalPosValue;
     return acc;
@@ -54,14 +54,14 @@ const getActualAllocation = (netLiquidationValue: number, positions: any[], watc
   return totalInCategory / netLiquidationValue * 100;
 }
 
-const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watchLists }) => {
+const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expectedAllocation }) => {
 
   const netLiquidationValue = totalCash + positions.reduce((acc, pos) => acc + (pos.mktPrice * (pos.position || 0)), 0);
 
   const getUncategorizedPositions = () => {
     return positions.filter(pos => {
       if (pos.position === 0) return false; // Skip positions with zero quantity
-      const hasPositionsInCategory = watchLists.some(wl => {
+      const hasPositionsInCategory = expectedAllocation.some(wl => {
         return wl.items.some((itm: any) => itm.ticker === pos.contractDesc);
       });
       return !hasPositionsInCategory;
@@ -72,7 +72,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
     if (active && payload && payload.length) {
       const category = payload[0].payload.category
       const isUncategorized = category === "Uncategorized"      
-      const watchList = watchLists.find(wl => wl.category === category)
+      const watchList = expectedAllocation.find(wl => wl.category === category)
       const items = isUncategorized ? getUncategorizedPositions() : watchList ? positions.filter(pos => pos.position > 0 && watchList.items.some((wli: any) => pos.contractDesc === wli.ticker)) : [];
       
       return (
@@ -116,13 +116,13 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, watch
   }
 
   const uncategorizedAllocation = positions.filter(pos => {
-    const hasPositionsInCategory = watchLists.some(wl => {
+    const hasPositionsInCategory = expectedAllocation.some(wl => {
       return wl.items.some((itm: any) => itm.ticker === pos.contractDesc);
     });
     return !hasPositionsInCategory;
   });
   const uncategorizedAllocationValue = uncategorizedAllocation.reduce((acc, wl) => acc + wl.mktValue, 0);
-  const data = watchLists.map(wl => {
+  const data = expectedAllocation.map(wl => {
     const actualAllocation = getActualAllocation(netLiquidationValue, positions, wl);
     return {
       category: wl.category,

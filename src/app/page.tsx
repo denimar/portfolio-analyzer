@@ -13,22 +13,19 @@ import {
 } from "@/components/ui/tabs"
 import AppHeader from "./components/AppHeader";
 import AllocationGraph from "./components/AllocationGraph";
+import expectedAllocation from "./components/portfolio-grid/expectedAllocation.json";
 
 export default function Home() {
-  const [currentTab, setCurrentTab] = useState<string>("my_allocation");
   const [positions, setPositions] = useState<any[]>([]);
   const [accountSummary, setAccountSummary] = useState<any>({});
-  const [watchLists, setWatchLists] = useState<any>([]);
 
   const loadInitialData = useCallback(async () => {
-    const [fetchedPositions, fetchedAccountSummary, fetchedWatchLists] = await Promise.all([
+    const [fetchedPositions, fetchedAccountSummary] = await Promise.all([
       axios.get('/api/ibkr/positions').then(res => res.data),
       axios.get('/api/ibkr/account/summary').then(res => res.data),
-      axios.get('/api/ibkr/watchlist').then(res => res.data)
     ]);
     setPositions(fetchedPositions);
     setAccountSummary(fetchedAccountSummary);
-    setWatchLists(fetchedWatchLists);
   }, []);
 
   const onIbkrConnected = useCallback(async () => {
@@ -47,10 +44,10 @@ export default function Home() {
             <TabsTrigger value="performance">Performance</TabsTrigger>
           </TabsList>
           <TabsContent value='my_allocation'>
-            <AllocationGraph totalCash={accountSummary.totalCash} positions={positions} watchLists={watchLists} />
+            <AllocationGraph totalCash={accountSummary.totalCash} positions={positions} expectedAllocation={expectedAllocation} />
           </TabsContent>
           <TabsContent value='allocation_strategy'>
-            <PortfolioGrid totalCash={accountSummary.totalCash} positions={positions} watchLists={watchLists} />
+            <PortfolioGrid expectedAllocation={expectedAllocation} />
           </TabsContent>
           <TabsContent value='positions'>
             <PositionsPanel positions={positions} />

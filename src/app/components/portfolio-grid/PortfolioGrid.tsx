@@ -1,24 +1,18 @@
 import { FC } from 'react';
-import { formatNumber } from '@/app/utils';
 
 type PortfolioGridProps = {
-  totalCash: number;
-  positions: any[]
-  watchLists: any[]
+  expectedAllocation: any[]
 }
 
-const PortfolioGrid: FC<PortfolioGridProps> = ({ totalCash, positions, watchLists }) => {
-  // const netLiquidationValue = totalCash + positions.reduce((acc, pos) => acc + (pos.mktPrice * (pos.position || 0)), 0);
-
-  if (watchLists.length > 0) {
-    const aloc = watchLists.map(wl => {
+const PortfolioGrid: FC<PortfolioGridProps> = ({ expectedAllocation }) => {
+  if (expectedAllocation.length > 0) {
+    const aloc = expectedAllocation.map(wl => {
       return {
         category: wl.category,
         expected: wl.allocation,
         actual: wl.allocation + Math.random() * 10 - 5,
       }
     })
-    console.log(JSON.stringify(aloc, null, 2));
   }
 
   return (
@@ -33,7 +27,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({ totalCash, positions, watchList
           </tr>
         </thead>
         <tbody>
-          {watchLists.map((row) => (
+          {expectedAllocation.map((row) => (
             <tr key={row.id} className="border-b last:border-0 hover:bg-gray-50 text-xs">
               <td className="px-4 py-3 font-semibold">{row.category}</td>
               <td className="px-4 py-3 text-center">{row.allocation.toString()}%</td>
@@ -43,6 +37,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({ totalCash, positions, watchList
           ))}
         </tbody>
       </table>
+      {/*
       <div className='w-full flex flex-col items-center text-sky-900 border-t border-t-sky-200 p-4 bg-sky-50 h-full'>
         <div className='w-[750px]'>
           <div className='w-full font-bold text-lg text-center'>Dollar Cost Averaging (DCA)</div>
@@ -64,6 +59,7 @@ const PortfolioGrid: FC<PortfolioGridProps> = ({ totalCash, positions, watchList
           </div>
         </div>
       </div>
+      */}
     </div>
   );
 }
