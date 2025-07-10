@@ -16,7 +16,6 @@ import AllocationGraph from "./components/AllocationGraph";
 import expectedAllocationJSON from "./components/portfolio-grid/expectedAllocation.json";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Loader } from "lucide-react";
-import PortfolioSelector from "./components/PortfolioSelector";
 
 export default function Home() {
   const [positions, setPositions] = useState<any[]>([]);
@@ -93,15 +92,15 @@ export default function Home() {
 
   return (
     <EnsureIbkrConnection onConnect={onIbkrConnected}>
-      <AppHeader accountSummary={accountSummary} />
+      <AppHeader 
+        accountSummary={accountSummary}
+        portfolios={expectedAllocationJSON}
+        selectedPortfolioId={selectedPortfolioId}
+        onPortfolioChange={handlePortfolioChange}
+      />
       {
         isPending ? <div className="flex items-center justify-center h-screen"><Loader className="animate-spin h-6 w-6" /></div> : (
           <div className="p-2">
-            <PortfolioSelector 
-              portfolios={expectedAllocationJSON}
-              selectedPortfolioId={selectedPortfolioId}
-              onPortfolioChange={handlePortfolioChange}
-            />
             <Tabs value={activeTab} onValueChange={handleTabChange}>
               <TabsList>
                 <TabsTrigger value="my_allocation">Allocation</TabsTrigger>
