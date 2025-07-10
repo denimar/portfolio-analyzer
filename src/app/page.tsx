@@ -1,7 +1,7 @@
 "use client";
 
 import PortfolioGrid from "./components/portfolio-grid/PortfolioGrid";
-import { useState, useCallback, useEffect, useTransition } from "react";
+import { useState, useCallback, useEffect, useTransition, Suspense } from "react";
 import axios from "axios";
 import EnsureIbkrConnection from "./components/ensure-ibkr-connection";
 import PositionsPanel from "./PositionsPanel/PositionsPanel";
@@ -44,7 +44,8 @@ const savePortfolioId = (portfolioId: string): void => {
   }
 };
 
-export default function Home() {
+// Main content component that uses useSearchParams
+function HomeContent() {
   const [positions, setPositions] = useState<any[]>([]);
   const [accountSummary, setAccountSummary] = useState<any>({});
   const [activeTab, setActiveTab] = useState("my_allocation");
@@ -153,5 +154,23 @@ export default function Home() {
         )
       }
     </EnsureIbkrConnection >
+  );
+}
+
+// Loading fallback component
+function HomeLoading() {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <Loader className="animate-spin h-6 w-6" />
+    </div>
+  );
+}
+
+// Main page component with Suspense boundary
+export default function Home() {
+  return (
+    <Suspense fallback={<HomeLoading />}>
+      <HomeContent />
+    </Suspense>
   );
 }
