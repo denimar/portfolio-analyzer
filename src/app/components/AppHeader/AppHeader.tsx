@@ -46,15 +46,15 @@ const AppHeader: FC<AppHeaderProps> = ({
           </div>
           <div className="flex flex-col">
             <div className="font-semibold">Daily P&L</div>
-            <div className={`${condColor(accountSummary.dailyPNL)}`}>{accountSummary.dailyPNL > 0 ? '+' : ''}{formatNumber(accountSummary.dailyPNL)}</div>
+            <div className={`${condColor(accountSummary.dailyPnL)}`}>{accountSummary.dailyPnL > 0 ? '+' : ''}{formatNumber(accountSummary.dailyPnL)}</div>
           </div>
           <div className="flex flex-col">
             <div className="font-semibold">Unrealized P&L</div>
-            <div className={`${condColor(accountSummary.unrealizedPNL)}`}>{accountSummary.unrealizedPNL > 0 ? '+' : ''}{formatNumber(accountSummary.unrealizedPNL)}</div>
+            <div className={`${condColor(accountSummary.unrealizedPnL)}`}>{accountSummary.unrealizedPnL > 0 ? '+' : ''}{formatNumber(accountSummary.unrealizedPnL)}</div>
           </div>
           <div className="flex flex-col">
             <div className="font-semibold">Realized P&L</div>
-            <div className={`${condColor(accountSummary.realizedPNL)}`}>{accountSummary.realizedPNL > 0 ? '+' : ''}{formatNumber(accountSummary.realizedPNL)}</div>
+            <div className={`${condColor(accountSummary.realizedPnL)}`}>{accountSummary.realizedPnL > 0 ? '+' : ''}{formatNumber(accountSummary.realizedPnL)}</div>
           </div>
         </div>
       </div>

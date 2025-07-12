@@ -8,8 +8,9 @@ type PositionsPanelProps = {
 const PositionsPanel: FC<PositionsPanelProps> = ({ positions }) => {
 
   const extractExchange = (position: any) => {
-    if (['NYSE', 'NASDAQ'].includes(position.listingExchange)) return position.listingExchange
-    return position.allExchanges.split(',')[0]
+    // if (['NYSE', 'NASDAQ'].includes(position.listingExchange)) return position.listingExchange
+    // return position.allExchanges.split(',')[0]
+    return 'NASDAQ'
   }
 
   return (
@@ -26,54 +27,24 @@ const PositionsPanel: FC<PositionsPanelProps> = ({ positions }) => {
       <tbody>
         {positions
           .sort((a, b) => {
-            if (a.unrealizedPnl > b.unrealizedPnl) return -1;
-            if (a.unrealizedPnl < b.unrealizedPnl) return 1;
+            if (a.unrealizedPnL > b.unrealizedPnL) return -1;
+            if (a.unrealizedPnL < b.unrealizedPnL) return 1;
             return 0;
           })
-          .filter(position => position.position > 0)
+          .filter(position => position.pos > 0)
           .map((position) => (
-            <tr key={position.conid} className="border-b last:border-0 hover:bg-gray-50 text-sm">
+            <tr key={position.symbol} className="border-b last:border-0 hover:bg-gray-50 text-sm">
               <td className="px-4 py-3 font-semibold">
-                <a className="" target="_blank" rel="noopener noreferrer" href={`https://www.tradingview.com/symbols/${extractExchange(position)}-${position.contractDesc}/`}>{position.contractDesc}</a>
+                <a className="" target="_blank" rel="noopener noreferrer" href={`https://www.tradingview.com/symbols/${position.exchange}-${position.symbol}/`}>{position.symbol}</a>
               </td>
-              <td className="px-4 py-3 text-center">{position.position}</td>
-              <td className="px-4 py-3 text-right">{formatNumber(position.mktValue)}</td>
-              <td className={`px-4 py-3 text-right ${condColor(position.unrealizedPnl)}`}>{formatNumber(position.unrealizedPnl)}</td>
-              <td className="px-4 py-3 text-right">{formatNumber(position.mktPrice)}</td>
+              <td className="px-4 py-3 text-center">{position.pos}</td>
+              <td className="px-4 py-3 text-right">{formatNumber(position.marketValue)}</td>
+              <td className={`px-4 py-3 text-right ${condColor(position.unrealizedPnL)}`}>{formatNumber(position.unrealizedPnL)}</td>
+              <td className="px-4 py-3 text-right">{formatNumber(position.currentPrice)}</td>
             </tr>
           ))}
       </tbody>
     </table>
-
-    // <Table>
-    //   <TableHeader>
-    //     <TableRow>
-    //       <TableHead className="w-[100px]">Ticker</TableHead>
-    //       <TableHead className="text-center">Pos</TableHead>
-    //       <TableHead className="text-right">Mkt Val</TableHead>
-    //       <TableHead className="text-right">Unrlzd P&L</TableHead>
-    //       <TableHead className="text-right">Mkt Price</TableHead>
-    //     </TableRow>
-    //   </TableHeader>
-    //   <TableBody>
-    //     {positions
-    //       .sort((a, b) => {
-    //          if (a.unrealizedPnl > b.unrealizedPnl) return -1;
-    //          if (a.unrealizedPnl < b.unrealizedPnl) return 1;
-    //           return 0;
-    //       })
-    //       .filter(position => position.position > 0)
-    //       .map((position) => (
-    //       <TableRow key={position.conid}>
-    //         <TableCell className="font-medium">{position.contractDesc}</TableCell>
-    //         <TableCell className="font-light text-center">{position.position}</TableCell>
-    //         <TableCell className="font-light text-right">{formatNumber(position.mktValue)}</TableCell>
-    //         <TableCell className="font-light text-right">{formatNumber(position.unrealizedPnl)}</TableCell>
-    //         <TableCell className="font-light text-right">{formatNumber(position.mktPrice)}</TableCell>
-    //       </TableRow>
-    //     ))}
-    //   </TableBody>
-    // </Table>
   )
 }
 

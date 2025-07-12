@@ -46,8 +46,8 @@ type AllocationGraphProps = {
 
 const getActualAllocation = (netLiquidationValue: number, positions: any[], expectedAllocation: any): number => {
   const totalInCategory = positions.reduce((acc, pos) => {
-    const itemsInCategory = expectedAllocation.items.filter((itm: any) => itm.ticker === pos.contractDesc);
-    const totalPosValue = itemsInCategory.reduce((itemAcc: number) => itemAcc + (pos.mktPrice * (pos.position || 0)), 0);
+    const itemsInCategory = expectedAllocation.items.filter((itm: any) => itm.ticker === pos.symbol);
+    const totalPosValue = itemsInCategory.reduce((itemAcc: number) => itemAcc + (pos.currentPrice * (pos.pos || 0)), 0);
     acc += totalPosValue;
     return acc;
   }, 0);
@@ -56,13 +56,13 @@ const getActualAllocation = (netLiquidationValue: number, positions: any[], expe
 
 const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expectedAllocation }) => {
 
-  const netLiquidationValue = totalCash + positions.reduce((acc, pos) => acc + (pos.mktPrice * (pos.position || 0)), 0);
+  const netLiquidationValue = totalCash + positions.reduce((acc, pos) => acc + (pos.currentPrice * (pos.pos || 0)), 0);
 
   const getUncategorizedPositions = () => {
     return positions.filter(pos => {
-      if (pos.position === 0) return false; // Skip positions with zero quantity
+      if (pos.pos === 0) return false; // Skip positions with zero quantity
       const hasPositionsInCategory = expectedAllocation.some(wl => {
-        return wl.items.some((itm: any) => itm.ticker === pos.contractDesc);
+        return wl.items.some((itm: any) => itm.ticker === pos.symbol);
       });
       return !hasPositionsInCategory;
     });
@@ -73,7 +73,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
       const category = payload[0].payload.category
       const isUncategorized = category === "Uncategorized"      
       const watchList = expectedAllocation.find(wl => wl.category === category)
-      const items = isUncategorized ? getUncategorizedPositions() : watchList ? positions.filter(pos => pos.position > 0 && watchList.items.some((wli: any) => pos.contractDesc === wli.ticker)) : [];
+      const items = isUncategorized ? getUncategorizedPositions() : watchList ? positions.filter(pos => pos.pos > 0 && watchList.items.some((wli: any) => pos.symbol === wli.ticker)) : [];
       
       return (
         <div className="bg-sky-50 border rounded shadow text-sm">
@@ -96,10 +96,10 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
                     <table className='w-full'>
                       {
                         items.map(pos => (
-                          <tr key={pos.contractDesc} className='text-gray-600'>
-                            <td className="w-[65px] pr-4 px-2">{pos.contractDesc}</td>
-                            <td className='w-[65px] text-right py-1 px-2'>{((pos.mktPrice * (pos.position || 0)) / netLiquidationValue * 100).toFixed(1)}%</td>
-                            <td className='w-[100px] text-right px-2'>{formatNumber(pos.mktPrice * (pos.position || 0))}</td>
+                          <tr key={pos.symbol} className='text-gray-600'>
+                            <td className="w-[65px] pr-4 px-2">{pos.symbol}</td>
+                            <td className='w-[65px] text-right py-1 px-2'>{((pos.marketValue || 0) / netLiquidationValue * 100).toFixed(1)}%</td>
+                            <td className='w-[100px] text-right px-2'>{formatNumber(pos.marketValue)}</td>
                           </tr>
                         ))
                       }
@@ -117,11 +117,11 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
 
   const uncategorizedAllocation = positions.filter(pos => {
     const hasPositionsInCategory = expectedAllocation.some(wl => {
-      return wl.items.some((itm: any) => itm.ticker === pos.contractDesc);
+      return wl.items.some((itm: any) => itm.ticker === pos.symbol);
     });
     return !hasPositionsInCategory;
   });
-  const uncategorizedAllocationValue = uncategorizedAllocation.reduce((acc, wl) => acc + wl.mktValue, 0);
+  const uncategorizedAllocationValue = uncategorizedAllocation.reduce((acc, wl) => acc + wl.marketValue, 0);
   const data = expectedAllocation.map(wl => {
     const actualAllocation = getActualAllocation(netLiquidationValue, positions, wl);
     return {
@@ -137,6 +137,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
 
   return (
     <div className="flex flex-1 w-full absolute h-[calc(100%-180px)] pt-4">
+      {/* <div>{JSON.stringify(positions)}</div> */}
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data}>
           <CartesianGrid vertical={false} horizontal={false} strokeDasharray="3 3" stroke="#e0e0e0" />

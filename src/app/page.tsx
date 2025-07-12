@@ -104,20 +104,16 @@ function HomeContent() {
     savePortfolioId(portfolioId);
   };
 
-  const loadInitialData = useCallback(async () => {
+  useEffect(() => {
     startTransition(async () => {
       const [fetchedPositions, fetchedAccountSummary] = await Promise.all([
-        axios.get('/api/ibkr/positions').then(res => res.data),
-        axios.get('/api/ibkr/account/summary').then(res => res.data),
+        axios.get('https://denimarlab.pro/api/positions').then(res => res.data),
+        axios.get('https://denimarlab.pro/api/accounts-summary').then(res => res.data),
       ]);
       setPositions(fetchedPositions);
       setAccountSummary(fetchedAccountSummary);
     });
   }, []);
-
-  const onIbkrConnected = useCallback(async () => {
-    loadInitialData();
-  }, [loadInitialData]);
 
   return (
     <>
