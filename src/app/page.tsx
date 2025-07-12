@@ -106,12 +106,10 @@ function HomeContent() {
 
   useEffect(() => {
     startTransition(async () => {
-      debugger;
       const [fetchedPositions, fetchedAccountSummary] = await Promise.all([
         axios.get('https://denimarlab.pro/api/positions').then(res => res.data.data),
         axios.get('https://denimarlab.pro/api/accounts-summary').then(res => res.data),
       ]);
-      debugger;
       setPositions(fetchedPositions);
       setAccountSummary(fetchedAccountSummary);
     });
