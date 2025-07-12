@@ -1,0 +1,16 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="#1e40af" stroke="#3b82f6" stroke-width="2"/>
+  
+  <!-- Dollar sign -->
+  <path d="M16 6v20M12 10h8M12 14h8M12 18h8" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Graph line representing portfolio growth -->
+  <path d="M8 20l3-2 3 1 4-3 6 2" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Graph dots -->
+  <circle cx="11" cy="18" r="1.5" fill="#10b981"/>
+  <circle cx="14" cy="19" r="1.5" fill="#10b981"/>
+  <circle cx="18" cy="16" r="1.5" fill="#10b981"/>
+  <circle cx="24" cy="18" r="1.5" fill="#10b981"/>
+</svg> 
