@@ -3,7 +3,6 @@
 import PortfolioGrid from "./components/portfolio-grid/PortfolioGrid";
 import { useState, useCallback, useEffect, useTransition, Suspense } from "react";
 import axios from "axios";
-import EnsureIbkrConnection from "./components/ensure-ibkr-connection";
 import PositionsPanel from "./PositionsPanel/PositionsPanel";
 import {
   Tabs,
@@ -121,7 +120,7 @@ function HomeContent() {
   }, [loadInitialData]);
 
   return (
-    <EnsureIbkrConnection onConnect={onIbkrConnected}>
+    <>
       <AppHeader 
         accountSummary={accountSummary}
         portfolios={expectedAllocationJSON}
@@ -154,7 +153,7 @@ function HomeContent() {
           </div>
         )
       }
-    </EnsureIbkrConnection >
+    </>
   );
 }
 

@@ -18,7 +18,7 @@ export async function ibkrApi<T>({
   data,
   params,
   headers = {},
-  baseUrl = 'https://localhost:5055/v1/api',
+  baseUrl = 'https://denimarlab.pro/api',
   cookies,
 }: IBKRApiOptions): Promise<T> {
     console.log(`BaseURL: ${baseUrl}`);

@@ -1,9 +1,0 @@
-services:
-  ibkr-gateway:
-    build: .
-    container_name: ibkr-gateway
-    ports:
-      - "5055:5055"
-    restart: unless-stopped
-    environment:
-      - TZ=America/New_York

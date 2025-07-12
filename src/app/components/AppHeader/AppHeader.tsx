@@ -42,7 +42,7 @@ const AppHeader: FC<AppHeaderProps> = ({
           </div>
           <div className="flex flex-col">
             <div className="font-semibold">Net Liquidation Value</div>
-            <div>{formatNumber(accountSummary.netLiquidation)}</div>
+            <div>{formatNumber(accountSummary.netLiquidationValue)}</div>
           </div>
           <div className="flex flex-col">
             <div className="font-semibold">Daily P&L</div>
