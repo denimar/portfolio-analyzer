@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { ChevronDown, Info } from 'lucide-react';
 
 type Portfolio = {
@@ -19,10 +19,11 @@ const PortfolioSelector: FC<PortfolioSelectorProps> = ({
   selectedPortfolioId, 
   onPortfolioChange 
 }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
   const selectedPortfolio = portfolios.find(p => p.id === selectedPortfolioId);
 
   return (
-    <div className="flex flex-col lg:flex-row lg:items-start gap-4">
+    <div className="flex flex-col lg:flex-row lg:items-center gap-4">
       {/* Portfolio Selection */}
       <div className="flex items-center gap-3 min-w-fit">
         <label className="text-sm font-semibold text-gray-700 whitespace-nowrap">
@@ -44,18 +45,31 @@ const PortfolioSelector: FC<PortfolioSelectorProps> = ({
         </div>
       </div>
 
-      {/* Portfolio Description */}
+      {/* Portfolio Description with Tooltip */}
       {selectedPortfolio && (
         <div className="flex-1">
-          <div className="flex items-start gap-2 mb-2">
-            <Info className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
-            <h3 className="text-sm font-semibold text-gray-800">
-              {selectedPortfolio.name} Strategy
-            </h3>
+          <div className="flex items-center gap-2">
+            <div className="relative">
+              <Info 
+                className="h-4 w-4 text-blue-600 cursor-help hover:text-blue-700 transition-colors"
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+              />
+              {showTooltip && (
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 px-4 py-3 bg-white border border-gray-200 text-gray-800 text-sm rounded-lg shadow-xl max-w-sm z-50 min-w-64">
+                  <div className="relative">
+                    <div className="font-medium text-gray-900 mb-1">Strategy Overview</div>
+                    <div className="text-gray-700 leading-relaxed">
+                      {selectedPortfolio.notes}
+                    </div>
+                    {/* Tooltip arrow pointing up */}
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-b-6 border-transparent border-b-white"></div>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-b-6 border-transparent border-b-gray-200 -mb-1"></div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-          <p className="text-sm text-gray-700 leading-relaxed pl-6">
-            {selectedPortfolio.notes}
-          </p>
         </div>
       )}
     </div>
