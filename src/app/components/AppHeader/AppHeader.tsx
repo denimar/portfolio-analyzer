@@ -1,6 +1,7 @@
 import { condColor, formatNumber } from "@/app/utils";
 import { FC } from "react";
 import PortfolioSelector from "../PortfolioSelector";
+import IbkrStatus from "../IbkrStatus";
 
 type Portfolio = {
   id: string;
@@ -33,7 +34,7 @@ const AppHeader: FC<AppHeaderProps> = ({
           onPortfolioChange={onPortfolioChange}
         />
 
-        <div className="flex flex-1 flex-row gap-10 items-center justify-end text-xs min-h-[32px] pr-16">
+        <div className="flex flex-1 flex-row gap-10 items-center justify-end text-xs min-h-[32px] pr-4">
           <div className="flex flex-col">
             <div className="font-semibold">Total Cash</div>
             <div>{formatNumber(accountSummary.totalCash)}</div>
@@ -54,6 +55,7 @@ const AppHeader: FC<AppHeaderProps> = ({
             <div className="font-semibold">Realized P&L</div>
             <div className={`${condColor(accountSummary.realizedPnL)}`}>{accountSummary.realizedPnL > 0 ? '+' : ''}{formatNumber(accountSummary.realizedPnL)}</div>
           </div>
+          <IbkrStatus className="ml-10 mb-2" />
         </div>
       </div>
     </div>
