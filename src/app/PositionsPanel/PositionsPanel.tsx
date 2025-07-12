@@ -13,6 +13,10 @@ const PositionsPanel: FC<PositionsPanelProps> = ({ positions }) => {
     return 'NASDAQ'
   }
 
+  if (positions.length > 0) {
+    debugger;
+  }
+
   return (
     <table className="min-w-full text-left border-collapse text-gray-800">
       <thead>
