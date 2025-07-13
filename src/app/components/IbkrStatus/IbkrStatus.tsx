@@ -15,16 +15,19 @@ const IbkrStatus: FC<IbkrStatusProps> = ({ className }) => {
   useEffect(() => {
     const interval = setInterval(async () => {
       const healthStatus: any = await axios.get('https://denimarlab.pro/api/health').then(res => res.data);
-      debugger
       setIsUp(healthStatus.tws.connected);
       setLastTimeChecked(moment().format())
     }, 1000)
     return () => clearInterval(interval)
   }, [])
 
+  const openIbGateway = () => {
+    window.open('https://denimarlab.pro/ib', '_blank')
+  }
+
   return (
     <CustomTooltip title={ `${isUp ? 'IBKR is connected' : 'IBKR is down'}`}>
-      <div className={`relative border border-slate-200 rounded-full shadow-lg py-[2px] px-[4px] ${className}`}>
+      <div className={`relative border border-slate-200 rounded-full shadow-lg py-[2px] px-[4px] cursor-pointer ${className}`} onClick={openIbGateway}>
         <Image className="rounded-full" src="/ibkr.png" alt={`Ibkr status at ${lastTimeChecked}`} width={32} height={32} />
         <span className={`absolute bottom-0 left-7 transform translate-y-1/4 w-3.5 h-3.5 ${isUp ? 'bg-green-400' : 'bg-gray-400'} border-2 border-white dark:border-gray-800 rounded-full`}></span>
       </div>
