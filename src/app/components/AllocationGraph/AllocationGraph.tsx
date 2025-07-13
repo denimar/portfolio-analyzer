@@ -98,7 +98,11 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
                       {
                         items.map(pos => (
                           <tr key={pos.symbol} className='text-gray-600'>
-                            <td className="w-[65px] pr-4 px-2">{pos.symbol}</td>
+                            <td className="w-[65px] pr-4 px-2">
+                              <a href={`https://finance.yahoo.com/quote/${pos.symbol}`} target="_blank" rel="noopener noreferrer">
+                                {(pos.symbol || '').replaceAll(",", ", ")}
+                              </a>
+                            </td>
                             <td className='w-[65px] text-right py-1 px-2'>{((pos.marketValue || 0) / netLiquidationValue * 100).toFixed(1)}%</td>
                             <td className='w-[100px] text-right px-2'>{formatNumber(pos.marketValue)}</td>
                           </tr>
