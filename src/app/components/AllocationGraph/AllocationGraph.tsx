@@ -140,50 +140,19 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
   
   const data = [...categorizedData, ...uncategorizedData];
 
-  // Calculate categories that need attention (deviation > 5%)
-  const attentionNeeded = data
-    .filter(item => item.category !== "Uncategorized")
+  // Calculate top 2 BUY categories (actual < expected, not Uncategorized)
+  const buyCategories = data
+    .filter(item => item.category !== "Uncategorized" && item.actual < item.expected)
     .map(item => ({
       ...item,
-      deviation: Math.abs(item.actual - item.expected)
+      buyAmount: netLiquidationValue * (item.expected - item.actual) / 100
     }))
-    .filter(item => item.deviation > 5)
-    .sort((a, b) => b.deviation - a.deviation)
-    .slice(0, 2); // Only top 2 categories
+    .sort((a, b) => b.buyAmount - a.buyAmount)
+    .slice(0, 2);
 
   return (
     <div className="flex flex-1 w-full absolute h-[calc(100%-180px)] pt-4">
       <div className="flex flex-col w-full">
-        {/* Attention Section */}
-        {attentionNeeded.length > 0 && (
-          <div className="mb-4 px-2">
-            <div className="grid grid-cols-2 gap-3">
-              {attentionNeeded.map((item, index) => {
-                const expectedAmount = netLiquidationValue * item.expected / 100;
-                const actualAmount = netLiquidationValue * item.actual / 100;
-                const differenceAmount = actualAmount - expectedAmount;
-                const isOverAllocated = differenceAmount > 0;
-                
-                return (
-                  <div key={index} className="p-3 bg-white rounded-lg border border-slate-200">
-                    <div className="text-center mb-2">
-                      <span className="font-medium text-slate-800 text-sm">{item.category}</span>
-                    </div>
-                    <div className="text-center">
-                      <div className={`text-lg font-bold ${isOverAllocated ? 'text-rose-600' : 'text-emerald-600'}`}>
-                        {isOverAllocated ? 'SELL' : 'BUY'}
-                      </div>
-                      <div className="text-sm font-semibold text-slate-700">
-                        {formatNumber(Math.abs(differenceAmount))}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-        
         {/* Chart */}
         <div className="flex-1">
           <ResponsiveContainer width="100%" height="100%">
@@ -251,6 +220,19 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
             </BarChart>
           </ResponsiveContainer>
         </div>
+
+        {/* BUY Categories Below Chart */}
+        {buyCategories.length > 0 && (
+          <div className="flex flex-row justify-center gap-8 mt-8">
+            {buyCategories.map((item, idx) => (
+              <div key={item.category} className="p-4 bg-white rounded-lg border border-emerald-200 shadow-sm min-w-[220px] text-center">
+                <div className="font-medium text-slate-800 text-base mb-1">{item.category}</div>
+                <div className="text-emerald-600 text-lg font-bold">BUY</div>
+                <div className="text-emerald-700 text-base font-semibold mt-1">{formatNumber(item.buyAmount)}</div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
