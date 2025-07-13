@@ -10,7 +10,8 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
+  ResponsiveContainer,
+  Cell
 } from 'recharts'
 
 const renderBarLabel = (netLiquidationValue: number, props: any) => {
@@ -122,24 +123,42 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
     return !hasPositionsInCategory;
   });
   const uncategorizedAllocationValue = uncategorizedAllocation.reduce((acc, wl) => acc + wl.marketValue, 0);
-  const data = expectedAllocation.map(wl => {
+  const categorizedData = expectedAllocation.map(wl => {
     const actualAllocation = getActualAllocation(netLiquidationValue, positions, wl);
     return {
       category: wl.category,
       expected: wl.allocation,
       actual: actualAllocation
     }
-  }).concat([{
+  });
+  
+  const uncategorizedData = [{
     category: "Uncategorized",
     expected: 0,
     actual: uncategorizedAllocationValue * 100 / netLiquidationValue
-  }])
+  }];
+  
+  const data = [...categorizedData, ...uncategorizedData];
 
   return (
     <div className="flex flex-1 w-full absolute h-[calc(100%-180px)] pt-4">
       {/* <div>{JSON.stringify(positions)}</div> */}
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data}>
+          <defs>
+            <linearGradient id="expectedGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#94a3b8" />
+              <stop offset="100%" stopColor="#475569" />
+            </linearGradient>
+            <linearGradient id="actualGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#38bdf8" />
+              <stop offset="100%" stopColor="#0284c7" />
+            </linearGradient>
+            <linearGradient id="uncategorizedGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#f59e0b" />
+              <stop offset="100%" stopColor="#d97706" />
+            </linearGradient>
+          </defs>
           <CartesianGrid vertical={false} horizontal={false} strokeDasharray="3 3" stroke="#e0e0e0" />
           <XAxis
             dataKey="category"
@@ -151,14 +170,41 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
               fontSize: 12,
               fontFamily: 'Inter, Helvetica Neue, sans-serif',
               fill: '#374151',
-              fontWeight: 600
+              fontWeight: 300
             }}
           />
           <YAxis hide={true} />
           <Tooltip content={<CustomTooltip />} />
-          <Legend verticalAlign="top" height={36} />
-          <Bar dataKey="expected" name="Expected %" fill="#a6a6a6" radius={[4, 4, 0, 0]} label={(props) => renderBarLabel(netLiquidationValue, props)} />
-          <Bar dataKey="actual" name="Actual %" fill="#336699" radius={[4, 4, 0, 0]} label={(props) => renderBarLabel(netLiquidationValue, props)} />
+          <Legend 
+            verticalAlign="top" 
+            height={36}
+            wrapperStyle={{
+              fontSize: '12px',
+              fontFamily: 'Inter, Helvetica Neue, sans-serif',
+              fontWeight: 300
+            }}
+          />
+          <Bar 
+            dataKey="expected" 
+            name="Expected %" 
+            fill="url(#expectedGradient)" 
+            radius={[4, 4, 0, 0]} 
+            label={(props) => renderBarLabel(netLiquidationValue, props)} 
+          />
+          <Bar 
+            dataKey="actual" 
+            name="Actual %" 
+            fill="url(#actualGradient)" 
+            radius={[4, 4, 0, 0]} 
+            label={(props) => renderBarLabel(netLiquidationValue, props)} 
+          >
+            {data.map((entry, index) => (
+              <Cell 
+                key={`cell-${index}`}
+                fill={entry.category === "Uncategorized" ? "url(#uncategorizedGradient)" : "url(#actualGradient)"}
+              />
+            ))}
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </div>
