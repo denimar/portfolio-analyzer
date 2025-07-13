@@ -140,73 +140,118 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
   
   const data = [...categorizedData, ...uncategorizedData];
 
+  // Calculate categories that need attention (deviation > 5%)
+  const attentionNeeded = data
+    .filter(item => item.category !== "Uncategorized")
+    .map(item => ({
+      ...item,
+      deviation: Math.abs(item.actual - item.expected)
+    }))
+    .filter(item => item.deviation > 5)
+    .sort((a, b) => b.deviation - a.deviation)
+    .slice(0, 2); // Only top 2 categories
+
   return (
     <div className="flex flex-1 w-full absolute h-[calc(100%-180px)] pt-4">
-      {/* <div>{JSON.stringify(positions)}</div> */}
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
-          <defs>
-            <linearGradient id="expectedGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#94a3b8" />
-              <stop offset="100%" stopColor="#475569" />
-            </linearGradient>
-            <linearGradient id="actualGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#38bdf8" />
-              <stop offset="100%" stopColor="#0284c7" />
-            </linearGradient>
-            <linearGradient id="uncategorizedGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#f59e0b" />
-              <stop offset="100%" stopColor="#d97706" />
-            </linearGradient>
-          </defs>
-          <CartesianGrid vertical={false} horizontal={false} strokeDasharray="3 3" stroke="#e0e0e0" />
-          <XAxis
-            dataKey="category"
-            angle={-30}
-            textAnchor="end"
-            interval={0}
-            height={90}
-            tick={{
-              fontSize: 12,
-              fontFamily: 'Inter, Helvetica Neue, sans-serif',
-              fill: '#374151',
-              fontWeight: 300
-            }}
-          />
-          <YAxis hide={true} />
-          <Tooltip content={<CustomTooltip />} />
-          <Legend 
-            verticalAlign="top" 
-            height={36}
-            wrapperStyle={{
-              fontSize: '12px',
-              fontFamily: 'Inter, Helvetica Neue, sans-serif',
-              fontWeight: 300
-            }}
-          />
-          <Bar 
-            dataKey="expected" 
-            name="Expected %" 
-            fill="url(#expectedGradient)" 
-            radius={[4, 4, 0, 0]} 
-            label={(props) => renderBarLabel(netLiquidationValue, props)} 
-          />
-          <Bar 
-            dataKey="actual" 
-            name="Actual %" 
-            fill="url(#actualGradient)" 
-            radius={[4, 4, 0, 0]} 
-            label={(props) => renderBarLabel(netLiquidationValue, props)} 
-          >
-            {data.map((entry, index) => (
-              <Cell 
-                key={`cell-${index}`}
-                fill={entry.category === "Uncategorized" ? "url(#uncategorizedGradient)" : "url(#actualGradient)"}
+      <div className="flex flex-col w-full">
+        {/* Attention Section */}
+        {attentionNeeded.length > 0 && (
+          <div className="mb-4 px-2">
+            <div className="grid grid-cols-2 gap-3">
+              {attentionNeeded.map((item, index) => {
+                const expectedAmount = netLiquidationValue * item.expected / 100;
+                const actualAmount = netLiquidationValue * item.actual / 100;
+                const differenceAmount = actualAmount - expectedAmount;
+                const isOverAllocated = differenceAmount > 0;
+                
+                return (
+                  <div key={index} className="p-3 bg-white rounded-lg border border-slate-200">
+                    <div className="text-center mb-2">
+                      <span className="font-medium text-slate-800 text-sm">{item.category}</span>
+                    </div>
+                    <div className="text-center">
+                      <div className={`text-lg font-bold ${isOverAllocated ? 'text-rose-600' : 'text-emerald-600'}`}>
+                        {isOverAllocated ? 'SELL' : 'BUY'}
+                      </div>
+                      <div className="text-sm font-semibold text-slate-700">
+                        {formatNumber(Math.abs(differenceAmount))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+        
+        {/* Chart */}
+        <div className="flex-1">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={data}>
+              <defs>
+                <linearGradient id="expectedGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#94a3b8" />
+                  <stop offset="100%" stopColor="#475569" />
+                </linearGradient>
+                <linearGradient id="actualGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#38bdf8" />
+                  <stop offset="100%" stopColor="#0284c7" />
+                </linearGradient>
+                <linearGradient id="uncategorizedGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#f59e0b" />
+                  <stop offset="100%" stopColor="#d97706" />
+                </linearGradient>
+              </defs>
+              <CartesianGrid vertical={false} horizontal={false} strokeDasharray="3 3" stroke="#e0e0e0" />
+              <XAxis
+                dataKey="category"
+                angle={-30}
+                textAnchor="end"
+                interval={0}
+                height={90}
+                tick={{
+                  fontSize: 12,
+                  fontFamily: 'Inter, Helvetica Neue, sans-serif',
+                  fill: '#374151',
+                  fontWeight: 300
+                }}
               />
-            ))}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
+              <YAxis hide={true} />
+              <Tooltip content={<CustomTooltip />} />
+              <Legend 
+                verticalAlign="top" 
+                height={36}
+                wrapperStyle={{
+                  fontSize: '12px',
+                  fontFamily: 'Inter, Helvetica Neue, sans-serif',
+                  fontWeight: 300
+                }}
+              />
+              <Bar 
+                dataKey="expected" 
+                name="Expected %" 
+                fill="url(#expectedGradient)" 
+                radius={[4, 4, 0, 0]} 
+                label={(props) => renderBarLabel(netLiquidationValue, props)} 
+              />
+              <Bar 
+                dataKey="actual" 
+                name="Actual %" 
+                fill="url(#actualGradient)" 
+                radius={[4, 4, 0, 0]} 
+                label={(props) => renderBarLabel(netLiquidationValue, props)} 
+              >
+                {data.map((entry, index) => (
+                  <Cell 
+                    key={`cell-${index}`}
+                    fill={entry.category === "Uncategorized" ? "url(#uncategorizedGradient)" : "url(#actualGradient)"}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
     </div>
   )
 }
