@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 const AppHeaderSkeleton: FC = () => {
   return (
-    <div className="shadow-lg border-b border-b-slate-200 z-20 bg-white">
+    <div className="border-b border-b-slate-200 z-20 bg-white">
       <div className="flex flex-row items-center justify-between pr-10 pl-6 py-4 min-h-[60px]">
         {/* Portfolio Selector */}
         <div className="h-9 w-64 bg-slate-200 rounded-md" />
