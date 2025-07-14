@@ -18,7 +18,7 @@ const PositionsPanel: FC<PositionsPanelProps> = ({ positions }) => {
   }
 
   return (
-    <table className="min-w-full text-left border-collapse text-gray-800">
+    <table className="min-w-full text-left border-collapse text-gray-800 bg-white">
       <thead>
         <tr className="font-semibold text-xs border-b border-b-gray-300">
           <th className="px-4 py-3">Ticker</th>

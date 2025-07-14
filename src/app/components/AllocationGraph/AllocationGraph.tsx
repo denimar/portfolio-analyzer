@@ -155,7 +155,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
     .slice(0, 3);
 
   return (
-    <div className="flex flex-1 w-full absolute h-[calc(100%-180px)] pt-4">
+    <div className="flex flex-1 w-full absolute h-[calc(100%-180px)] pt-4 bg-white">
       <div className="flex flex-col w-full">
         {/* Chart */}
         <div className="flex-1">
