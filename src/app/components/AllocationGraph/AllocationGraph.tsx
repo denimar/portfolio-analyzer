@@ -227,7 +227,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
 
         {/* BUY Categories Below Chart */}
         {buyCategories.length > 0 && (
-          <div className="flex flex-row justify-center gap-8 mt-8">
+          <div className="flex flex-row justify-center gap-8 mt-2">
             {buyCategories.map((item, idx) => (
               <div key={item.category} className="p-4 bg-white rounded-lg border border-emerald-200 shadow-sm min-w-[220px] text-center">
                 <div className="font-medium text-slate-800 text-base mb-1">{item.category}</div>
