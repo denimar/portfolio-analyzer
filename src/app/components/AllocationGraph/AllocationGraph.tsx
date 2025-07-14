@@ -152,7 +152,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
       buyAmount: netLiquidationValue * (item.expected - item.actual) / 100
     }))
     .sort((a, b) => b.buyAmount - a.buyAmount)
-    .slice(0, 2);
+    .slice(0, 3);
 
   return (
     <div className="flex flex-1 w-full absolute h-[calc(100%-180px)] pt-4">
