@@ -118,16 +118,16 @@ function HomeContent() {
   }, []);
 
   return (
-    <div className="bg-gray-100">
+    <div>
       {isPending ? (
-        <>
+        <div className="min-w-full min-h-full absolute bg-gray-100">
           <AppHeaderSkeleton />
           <div className="flex items-center justify-center min-h-[60vh]">
             <Loader className="animate-spin h-10 w-10 text-slate-400" />
           </div>
-        </>
+        </div>
       ) : (
-        <>
+        <div className="bg-gray-100">
           <AppHeader 
             accountSummary={accountSummary}
             portfolios={expectedAllocationJSON}
@@ -184,7 +184,7 @@ function HomeContent() {
               </TabsContent>
             </Tabs>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
