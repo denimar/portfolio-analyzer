@@ -160,7 +160,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
         {/* Chart */}
         <div className="flex-1">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={data}>
+            <BarChart data={data} margin={{ bottom: 0, top: 20 }}>
               <defs>
                 <linearGradient id="expectedGradient" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#94a3b8" />
@@ -189,7 +189,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
                   fontWeight: 300
                 }}
               />
-              <YAxis hide={true} />
+              <YAxis hide={true} domain={[0, 'dataMax + 5']} />
               <Tooltip content={<CustomTooltip />} />
               <Legend 
                 verticalAlign="top" 
@@ -227,7 +227,7 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
 
         {/* BUY Categories Below Chart */}
         {buyCategories.length > 0 && (
-          <div className="flex flex-row justify-center gap-8 mt-2">
+          <div className="flex flex-row justify-center gap-8 mt-1">
             {buyCategories.map((item, idx) => (
               <div key={item.category} className="p-4 bg-white rounded-lg border border-emerald-200 shadow-sm min-w-[220px] text-center">
                 <div className="font-medium text-slate-800 text-base mb-1">{item.category}</div>
