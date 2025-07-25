@@ -48,16 +48,34 @@ type AllocationGraphProps = {
 const getActualAllocation = (netLiquidationValue: number, positions: any[], expectedAllocation: any): number => {
   const totalInCategory = positions.reduce((acc, pos) => {
     const itemsInCategory = expectedAllocation.items.filter((itm: any) => itm.ticker === pos.symbol);
-    const totalPosValue = itemsInCategory.reduce((itemAcc: number) => itemAcc + (pos.currentPrice * (pos.pos || 0)), 0);
-    acc += totalPosValue;
+    if (itemsInCategory.length > 0) {
+      const marketValue = parseFloat(pos.marketValue) || 0;
+      acc += (isNaN(marketValue) ? 0 : marketValue);
+    }
     return acc;
   }, 0);
-  return totalInCategory / netLiquidationValue * 100;
+  
+  // Debug logging for Utilities
+  if (expectedAllocation.category === 'Utilities') {
+    console.log('Utilities calculation:', {
+      category: expectedAllocation.category,
+      totalInCategory,
+      netLiquidationValue,
+      percentage: totalInCategory / netLiquidationValue * 100,
+      items: expectedAllocation.items
+    });
+  }
+  
+  const percentage = totalInCategory / netLiquidationValue * 100;
+  return isNaN(percentage) ? 0 : percentage;
 }
 
 const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expectedAllocation }) => {
 
-  const netLiquidationValue = totalCash + positions.reduce((acc, pos) => acc + (pos.currentPrice * (pos.pos || 0)), 0);
+  const netLiquidationValue = (isNaN(totalCash) ? 0 : totalCash) + positions.reduce((acc, pos) => {
+    const marketValue = parseFloat(pos.marketValue) || 0;
+    return acc + (isNaN(marketValue) ? 0 : marketValue);
+  }, 0);
 
   const getUncategorizedPositions = () => {
     return positions.filter(pos => {
@@ -126,7 +144,10 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
     });
     return !hasPositionsInCategory;
   });
-  const uncategorizedAllocationValue = uncategorizedAllocation.reduce((acc, wl) => acc + wl.marketValue, 0);
+  const uncategorizedAllocationValue = uncategorizedAllocation.reduce((acc, wl) => {
+    const marketValue = parseFloat(wl.marketValue) || 0;
+    return acc + (isNaN(marketValue) ? 0 : marketValue);
+  }, 0);
   const categorizedData = expectedAllocation.map(wl => {
     const actualAllocation = getActualAllocation(netLiquidationValue, positions, wl);
     return {
@@ -139,19 +160,27 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
   const uncategorizedData = [{
     category: "Uncategorized",
     expected: 0,
-    actual: uncategorizedAllocationValue * 100 / netLiquidationValue
+    actual: isNaN(uncategorizedAllocationValue * 100 / netLiquidationValue) ? 0 : uncategorizedAllocationValue * 100 / netLiquidationValue
   }];
   
   const data = [...categorizedData, ...uncategorizedData];
 
-  // Calculate top 2 BUY categories (actual < expected, not Uncategorized)
+  // Calculate top 3 BUY categories (actual < expected, not Uncategorized)
   const buyCategories = data
-    .filter(item => item.category !== "Uncategorized" && item.actual < item.expected)
-    .map(item => ({
-      ...item,
-      buyAmount: netLiquidationValue * (item.expected - item.actual) / 100
-    }))
-    .sort((a, b) => b.buyAmount - a.buyAmount)
+    .filter(item => item.category !== "Uncategorized" && !isNaN(item.actual) && !isNaN(item.expected) && item.actual < item.expected)
+    .map(item => {
+      const percentageDifference = item.expected - item.actual;
+      const missingPercentage = (percentageDifference / item.expected) * 100; // Percentage of target allocation that's missing
+      const buyAmount = netLiquidationValue * percentageDifference / 100;
+      debugger;
+      return {
+        ...item,
+        buyAmount: isNaN(buyAmount) ? 0 : buyAmount,
+        percentageDifference: isNaN(percentageDifference) ? 0 : percentageDifference,
+        missingPercentage: isNaN(missingPercentage) ? 0 : missingPercentage
+      };
+    })
+    .sort((a, b) => b.missingPercentage - a.missingPercentage)
     .slice(0, 3);
 
   return (
