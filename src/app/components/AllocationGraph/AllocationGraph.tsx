@@ -157,11 +157,11 @@ const AllocationGraph: FC<AllocationGraphProps> = ({ totalCash, positions, expec
     }
   });
   
-  const uncategorizedData = [{
+  const uncategorizedData = uncategorizedAllocationValue > 0 ? [{
     category: "Uncategorized",
     expected: 0,
     actual: isNaN(uncategorizedAllocationValue * 100 / netLiquidationValue) ? 0 : uncategorizedAllocationValue * 100 / netLiquidationValue
-  }];
+  }] : [];
   
   const data = [...categorizedData, ...uncategorizedData];
 
