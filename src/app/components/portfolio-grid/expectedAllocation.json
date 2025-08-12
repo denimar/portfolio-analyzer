@@ -239,7 +239,7 @@
         "items": [
             {
                 "category": "Cash/Short-Term Treasuries",
-                "allocation": 30,
+                "allocation": 25,
                 "notes": "Maximizes liquidity and safety; ready for market opportunities.",
                 "tickers": [
                     { "name": "SHV", "description": "Short-Term Treasury ETF", "isETF": true }
@@ -247,10 +247,18 @@
             },
             {
                 "category": "US Treasuries (3-10yr)",
-                "allocation": 25,
+                "allocation": 17.5,
                 "notes": "Intermediate Treasuries offer a balance of income and stability.",
                 "tickers": [
                     { "name": "VGIT", "description": "Vanguard Intermediate-Term Treasury ETF", "isETF": true }
+                ]
+            },
+            {
+                "category": "Long-Term Treasuries",
+                "allocation": 7.5,
+                "notes": "Crash protection, more rate-sensitive.",
+                "tickers": [
+                    { "name": "TLT", "description": "iShares 20+ Year Treasury Bond ETF", "isETF": true }
                 ]
             },
             {
@@ -303,7 +311,7 @@
             },
             {
                 "category": "High-Quality REITs",
-                "allocation": 5,
+                "allocation": 3%,
                 "notes": "Best-in-class REITs provide income and diversification, even in challenging times.",
                 "tickers": [
                     { "name": "XLRE", "description": "Real Estate ETF", "isETF": true },
@@ -314,6 +322,14 @@
                     { "name": "AMT", "description": "American Tower" },
                     { "name": "EQIX", "description": "Equinix" },
                     { "name": "SPG", "description": "Simon Property Group" }
+                ]
+            },
+            {
+                "category": "Cybersecurity",
+                "allocation": 7,
+                "notes": "Growth & resilience in the digital economy.",
+                "tickers": [
+                    { "name": "HACK", "description": "Amplify Cybersecurity ETF", "isETF": true }
                 ]
             }
         ]
