@@ -311,7 +311,7 @@
             },
             {
                 "category": "High-Quality REITs",
-                "allocation": 3%,
+                "allocation": 3,
                 "notes": "Best-in-class REITs provide income and diversification, even in challenging times.",
                 "tickers": [
                     { "name": "XLRE", "description": "Real Estate ETF", "isETF": true },
